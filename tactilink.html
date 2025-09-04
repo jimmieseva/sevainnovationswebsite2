@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>TactiLink Voice Intelligence Platform - SEVA Innovations</title>
+  <meta name="description" content="Advanced tactical voice intelligence platform enabling real-time communication analysis and voice-data integration for mission-critical operations." />
+  
+  <link rel="icon" type="image/x-icon" href="https://cdn.prod.website-files.com/685327beac84014ed8904272/685421e284ec98b0bef1c627_logo_1.png">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link href="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/styles.css" rel="stylesheet" />
+  <style>
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .hero-service {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+    }
+    
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    .photo-gallery {
+      background: #f8f9fa;
+      padding: 60px 0;
+    }
+    
+    .gallery-item {
+      margin-bottom: 30px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+    }
+    
+    .slide {
+      display: none;
+      text-align: center;
+    }
+    
+    .slide.active {
+      display: block;
+    }
+    
+    .slide img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    
+    .slide-nav {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .slide-dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .slide-dot.active {
+      background-color: #007bff;
+    }
+    
+    .voice-stats {
+      background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+      color: white;
+      padding: 40px 0;
+      margin: 40px 0;
+    }
+    
+    .voice-stats .text-primary {
+      color: #ffc107 !important;
+    }
+  </style>
+</head>
+<body class="font-inter">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/Index.html">
+        <img src="https://cdn.prod.website-files.com/685327beac84014ed8904272/685421e284ec98b0bef1c627_logo_1.png" 
+             alt="SEVA Innovations Logo" width="150" height="100"/>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/Index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link active" href="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/tactilink.html">TactiLink</a></li>
+          <li class="nav-item"><a class="nav-link" href="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/lms.html">LMS</a></li>
+          <li class="nav-item"><a class="nav-link" href="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/ai-situational-awareness.html">AI Awareness</a></li>
+          <li class="nav-item"><a class="nav-link" href="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/dms.html">DMS</a></li>
+          <li class="nav-item"><a class="nav-link" href="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/Index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-service text-white">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h1 class="display-4 fw-bold mb-4">TactiLink Voice Intelligence Platform</h1>
+          <p class="lead mb-4">Advanced tactical voice intelligence platform enabling real-time communication analysis 
+             and voice-data integration for mission-critical operations.</p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="#services" class="btn btn-light btn-custom me-2">Platform Features</a>
+            <a href="#contact" class="btn btn-outline-light btn-custom">Request Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h2 class="mb-4">Revolutionary Voice Intelligence for Tactical Operations</h2>
+          <p class="lead mb-4">TactiLink transforms tactical communication into actionable data, bridging voice streams 
+             with digital command systems for enhanced situational awareness.</p>
+          <p class="mb-4">Our advanced platform enables real-time voice intelligence and integration between legacy radio 
+             networks and modern digital systems, providing unprecedented operational capabilities.</p>
+          <div class="row text-center">
+            <div class="col-4">
+              <h4 class="text-primary">99.5%</h4>
+              <small>Voice Recognition Accuracy</small>
+            </div>
+            <div class="col-4">
+              <h4 class="text-primary">50ms</h4>
+              <small>Response Time</small>
+            </div>
+            <div class="col-4">
+              <h4 class="text-primary">24/7</h4>
+              <small>Real-Time Processing</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img src=https://images.unsplash.com/photo-1620058623533-1f9a64e9baad?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+               alt="Voice Intelligence Technology" class="img-fluid rounded shadow" style="height: 400px; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voice Intelligence Stats -->
+  <section class="voice-stats">
+    <div class="container text-center">
+      <h2 class="mb-4">TactiLink Performance Metrics</h2>
+      <div class="row">
+        <div class="col-md-3">
+          <h3 class="text-primary">40%</h3>
+          <p>Improvement in situational awareness</p>
+        </div>
+        <div class="col-md-3">
+          <h3 class="text-primary">60%</h3>
+          <p>Reduction in response time</p>
+        </div>
+        <div class="col-md-3">
+          <h3 class="text-primary">95%</h3>
+          <p>Keyword detection accuracy</p>
+        </div>
+        <div class="col-md-3">
+          <h3 class="text-primary">19</h3>
+          <p>Week development cycle</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Features -->
+  <section id="services" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">TactiLink Platform Features</h2>
+      <div class="row g-4">
+        <div class="col-md-4 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-microphone fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">Real-Time Voice Transcription</h5>
+              <p class="card-text">Convert radio voice streams to text for analysis and logging with advanced 
+                 speech-to-text capabilities using Whisper STT technology.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-exclamation-triangle fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">Operational Keyword Detection</h5>
+              <p class="card-text">Detect operational keywords for instant alerting and automated response triggers 
+                 in mission-critical environments.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-robot fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">Voice-Controlled Automation</h5>
+              <p class="card-text">Enable voice-controlled automation of mission hardware and connected devices 
+                 through secure API integration.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Architecture -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">System Architecture</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-exchange-alt text-primary me-2"></i>Secure Serial Communication</h5>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success me-2"></i>RS-232C-based communication for legacy radios</li>
+                <li><i class="fas fa-check text-success me-2"></i>Error detection and secure logging</li>
+                <li><i class="fas fa-check text-success me-2"></i>Compatible with existing tactical equipment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-brain text-primary me-2"></i>Voice Intelligence Engine</h5>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success me-2"></i>Transcribes voice to text in real-time</li>
+                <li><i class="fas fa-check text-success me-2"></i>Triggers actions based on spoken commands</li>
+                <li><i class="fas fa-check text-success me-2"></i>Stores encrypted logs for auditing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery -->
+  <section class="photo-gallery">
+    <div class="container">
+      <h2 class="text-center mb-5">TactiLink Feature Set</h2>
+      <div class="row">
+                 <div class="col-md-4">
+           <div class="gallery-item">
+             <img src="https://images.unsplash.com/photo-1532086197721-3002dc9e661d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                  alt="Tactical Deployment" class="img-fluid" style="height: 250px; object-fit: cover;">
+             <div class="p-3">
+               <h6>Tactical Deployment</h6>
+               <small class="text-muted">Field testing in operational environments</small>
+             </div>
+           </div>
+         </div>
+                 <div class="col-md-4">
+           <div class="gallery-item">
+             <img src="https://images.unsplash.com/photo-1678977252570-58db7acbbeea?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                  alt="Voice Processing" class="img-fluid" style="height: 250px; object-fit: cover;">
+             <div class="p-3">
+               <h6>Voice Processing</h6>
+               <small class="text-muted">Real-time speech-to-text conversion</small>
+             </div>
+           </div>
+         </div>
+                 <div class="col-md-4">
+           <div class="gallery-item">
+             <img src="https://images.unsplash.com/photo-1727434032773-af3cd98375ba?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                  alt="System Integration" class="img-fluid" style="height: 250px; object-fit: cover;">
+             <div class="p-3">
+               <h6>System Integration</h6>
+               <small class="text-muted">Seamless API connectivity</small>
+             </div>
+           </div>
+         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slideshow Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Tactilink In Action</h2>
+      <div class="slideshow-container">
+                 <div class="slide active">
+           <img src="https://images.unsplash.com/photo-1579912436611-a9fec3fde2e5?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                alt="Military Communications Enhancement" class="img-fluid rounded" style="height: 400px; object-fit: cover;">
+          <div class="mt-3">
+            <h5>Military Communications Enhancement</h5>
+            <p class="text-muted">Successfully integrated TactiLink with existing tactical radio networks, 
+               improving situational awareness by 40% and reducing response times by 60%.</p>
+          </div>
+        </div>
+                 <div class="slide">
+           <img src="https://images.unsplash.com/photo-1580795479225-c50ab8c3348d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                alt="Emergency Response Optimization" class="img-fluid rounded" style="height: 400px; object-fit: cover;">
+          <div class="mt-3">
+            <h5>Emergency Response Optimization</h5>
+            <p class="text-muted">Deployed in emergency response scenarios, reducing response time by 60% 
+               through automated voice commands and real-time communication analysis.</p>
+          </div>
+        </div>
+                 <div class="slide">
+           <img src="https://images.unsplash.com/photo-1532086197721-3002dc9e661d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                alt="Security Operations Integration" class="img-fluid rounded" style="height: 400px; object-fit: cover;">
+          <div class="mt-3">
+            <h5>Security Operations Integration</h5>
+            <p class="text-muted">Enhanced security operations with real-time voice intelligence and 
+               automated threat detection for comprehensive situational awareness.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-nav">
+        <span class="slide-dot active" onclick="currentSlide(1)"></span>
+        <span class="slide-dot" onclick="currentSlide(2)"></span>
+        <span class="slide-dot" onclick="currentSlide(3)"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Ready to Deploy TactiLink?</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <form action="https://api.web3forms.com/submit" method="POST" id="form">
+            <input type="hidden" name="access_key" value="e2138341-3f31-4dfc-8b13-b3c81673f8db">
+            <input type="hidden" name="subject" value="TactiLink Voice Intelligence Platform Inquiry">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" name="name" placeholder="Your Name" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="email" class="form-control" name="email" placeholder="you@example.com" required />
+              </div>
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" rows="5" name="message" 
+                        placeholder="Tell us about your tactical communication needs and how TactiLink can help enhance your operations..." required></textarea>
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-custom">Request TactiLink Demo</button>
+            </div>
+            <div id="result" class="text-center mt-3"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-auto">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h6>SEVA Innovations</h6>
+          <p class="small">Transforming tactical technology with innovative solutions.</p>
+        </div>
+        <div class="col-md-4">
+          <h6>Contact</h6>
+          <p class="small">connect@seva-innovations.com<br>737-292-8071</p>
+        </div>
+        <div class="col-md-4">
+          <h6>Follow Us</h6>
+          <div class="d-flex justify-content-center gap-3">
+            <a href="#" class="text-white"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-3">
+      <small>&copy; 2025 SEVA Innovations. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="file:///C|/Users/JamesHunter/Downloads/seva-innovations-main/formsubmit.js"></script>
+  <script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slide-dot');
+
+    function showSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        dots[index].classList.remove('active');
+      });
+      
+      slides[currentSlideIndex].classList.add('active');
+      dots[currentSlideIndex].classList.add('active');
+    }
+
+    function currentSlide(n) {
+      currentSlideIndex = n - 1;
+      showSlides();
+    }
+
+    function nextSlide() {
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+      showSlides();
+    }
+
+    // Auto-advance slides every 5 seconds
+    setInterval(nextSlide, 5000);
+  </script>
+</body>
+</html> 

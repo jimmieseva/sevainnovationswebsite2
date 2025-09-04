@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Threat Detection & Response - SEVA Innovations</title>
+  <meta name="description" content="SEVA Innovations provides advanced threat detection and response solutions to protect your organization from cyber threats." />
+  
+  <link rel="icon" type="image/x-icon" href="https://cdn.prod.website-files.com/685327beac84014ed8904272/685421e284ec98b0bef1c627_logo_1.png">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link href="styles.css" rel="stylesheet" />
+  <style>
+    .hero-service {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+    }
+    
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    .photo-gallery {
+      background-color: #f8f9fa;
+      padding: 4rem 0;
+    }
+    
+    .gallery-item {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .slideshow-container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .slide {
+      display: none;
+      text-align: center;
+    }
+    
+    .slide.active {
+      display: block;
+    }
+    
+    .slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    
+    .slide-nav {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    
+    .slide-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #ddd;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .slide-dot.active {
+      background-color: #667eea;
+    }
+    
+    .threat-stats {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 2rem;
+      border-radius: 15px;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column min-vh-100 font-inter">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="Index.html">
+        <img src="https://cdn.prod.website-files.com/685327beac84014ed8904272/685421e284ec98b0bef1c627_logo_1.png" 
+             alt="SEVA Innovations Logo" width="200" height="100"/>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="Index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="service-design.html">Service Design</a></li>
+          <li class="nav-item"><a class="nav-link" href="system-integration.html">System Integration</a></li>
+          <li class="nav-item"><a class="nav-link" href="cybersecurity.html">Cybersecurity</a></li>
+          <li class="nav-item"><a class="nav-link active" href="threat-detection.html">Threat Detection</a></li>
+          <li class="nav-item"><a class="nav-link" href="Index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-service text-white">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h1 class="display-4 fw-bold mb-4">Threat Detection & Response</h1>
+          <p class="lead mb-4">Advanced monitoring systems that detect and respond to threats in real-time, 
+             minimizing damage and recovery time.</p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="#solutions" class="btn btn-light btn-custom me-2">Explore Solutions</a>
+            <a href="#contact" class="btn btn-outline-light btn-custom">Get Protected</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h2 class="mb-4">24/7 Threat Monitoring</h2>
+          <p class="lead mb-4">Stay ahead of cyber threats with our comprehensive detection and response solutions.</p>
+          <p class="mb-4">Our threat detection and response services provide continuous monitoring of your digital assets, 
+             using advanced AI and machine learning to identify and neutralize threats before they can cause damage. 
+             We offer rapid response capabilities to minimize downtime and protect your critical business operations.</p>
+          <div class="row text-center">
+            <div class="col-4">
+              <h4 class="text-primary">99.9%</h4>
+              <small>Detection Rate</small>
+            </div>
+            <div class="col-4">
+              <h4 class="text-primary">< 5min</h4>
+              <small>Response Time</small>
+            </div>
+            <div class="col-4">
+              <h4 class="text-primary">24/7</h4>
+              <small>Monitoring</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+               alt="Threat Detection Center" class="img-fluid rounded shadow" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Threat Detection Solutions -->
+  <section id="solutions" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Our Threat Detection Solutions</h2>
+      <div class="row g-4">
+        <div class="col-md-4 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">SIEM & Log Analysis</h5>
+              <p class="card-text">Comprehensive security information and event management 
+                 with advanced log analysis and correlation capabilities.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-eye fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">Behavioral Analytics</h5>
+              <p class="card-text">AI-powered behavioral analysis to detect anomalous 
+                 activities and potential insider threats.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-bolt fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">Automated Response</h5>
+              <p class="card-text">Instant automated threat response with 
+                 customizable playbooks and escalation procedures.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Threat Detection Process -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Our Threat Detection Process</h2>
+      <div class="row g-4">
+        <div class="col-md-3 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-search fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">1. Continuous Monitoring</h5>
+              <p class="card-text">24/7 monitoring of network traffic, system logs, 
+                 and user activities across all endpoints.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">2. AI Analysis</h5>
+              <p class="card-text">Machine learning algorithms analyze patterns 
+                 and identify potential threats in real-time.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-exclamation-triangle fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">3. Threat Alerting</h5>
+              <p class="card-text">Immediate alerts and notifications when 
+                 suspicious activities are detected.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="card h-100 border-0 shadow-sm service-card">
+            <div class="card-body">
+              <i class="fas fa-rocket fa-3x text-primary mb-3"></i>
+              <h5 class="card-title">4. Rapid Response</h5>
+              <p class="card-text">Automated and manual response procedures 
+                 to contain and neutralize threats quickly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Threat Statistics -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Current Threat Landscape</h2>
+      <div class="threat-stats">
+        <div class="row text-center">
+          <div class="col-md-3">
+            <h3 class="text-white">350%</h3>
+            <h5>Increase in Cyber Attacks</h5>
+            <p>Since 2020</p>
+          </div>
+          <div class="col-md-3">
+            <h3 class="text-white">$6.9T</h3>
+            <h5>Global Cybercrime Cost</h5>
+            <p>Annual impact</p>
+          </div>
+          <div class="col-md-3">
+            <h3 class="text-white">287 days</h3>
+            <h5>Average Detection Time</h5>
+            <p>Without proper monitoring</p>
+          </div>
+          <div class="col-md-3">
+            <h3 class="text-white">5 minutes</h3>
+            <h5>Our Response Time</h5>
+            <p>Threat neutralization</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery Section -->
+  <section class="photo-gallery">
+    <div class="container">
+      <h2 class="text-center mb-5">Our Threat Detection Work</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                 alt="Security Operations Center" />
+            <div class="p-3">
+              <h6>Security Operations Center</h6>
+              <small class="text-muted">24/7 monitoring and threat response</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                 alt="Threat Intelligence" />
+            <div class="p-3">
+              <h6>Threat Intelligence Platform</h6>
+              <small class="text-muted">Real-time threat intelligence and analysis</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                 alt="Incident Response" />
+            <div class="p-3">
+              <h6>Incident Response Team</h6>
+              <small class="text-muted">Rapid threat containment and recovery</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slideshow Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Threat Detection Case Studies</h2>
+      <div class="slideshow-container">
+        <div class="slide active">
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+               alt="Financial Services Protection" />
+          <div class="mt-3">
+            <h5>Financial Services Threat Detection</h5>
+            <p class="text-muted">Protected a major bank from sophisticated phishing attacks, 
+               detecting and blocking 10,000+ malicious attempts with zero false positives.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+               alt="Healthcare Security" />
+          <div class="mt-3">
+            <h5>Healthcare Security Monitoring</h5>
+            <p class="text-muted">Implemented comprehensive threat detection for a hospital network, 
+               preventing ransomware attacks and ensuring patient data protection.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+               alt="Manufacturing Security" />
+          <div class="mt-3">
+            <h5>Manufacturing Threat Response</h5>
+            <p class="text-muted">Detected and contained an advanced persistent threat in a manufacturing facility, 
+               preventing production disruption and data theft.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-nav">
+        <span class="slide-dot active" onclick="currentSlide(1)"></span>
+        <span class="slide-dot" onclick="currentSlide(2)"></span>
+        <span class="slide-dot" onclick="currentSlide(3)"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Ready to Protect Your Organization?</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <form action="https://api.web3forms.com/submit" method="POST" id="form">
+            <input type="hidden" name="access_key" value="e2138341-3f31-4dfc-8b13-b3c81673f8db">
+            <input type="hidden" name="subject" value="Threat Detection & Response Service Inquiry">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" name="name" placeholder="Your Name" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="email" class="form-control" name="email" placeholder="you@example.com" required />
+              </div>
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" rows="5" name="message" 
+                        placeholder="Tell us about your security concerns and current threat detection needs..." required></textarea>
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-custom">Get Protected Now</button>
+            </div>
+            <div id="result" class="text-center mt-3"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-auto">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h6>SEVA Innovations</h6>
+          <p class="small">Transforming enterprise technology with innovative solutions.</p>
+        </div>
+        <div class="col-md-4">
+          <h6>Contact</h6>
+          <p class="small">info@sevainnovations.com<br>+1 (555) 123-4567</p>
+        </div>
+        <div class="col-md-4">
+          <h6>Follow Us</h6>
+          <div class="d-flex justify-content-center gap-3">
+            <a href="#" class="text-white"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-3">
+      <small>&copy; 2025 SEVA Innovations. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="formsubmit.js"></script>
+  <script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slide-dot');
+
+    function showSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        dots[index].classList.remove('active');
+      });
+      
+      slides[currentSlideIndex].classList.add('active');
+      dots[currentSlideIndex].classList.add('active');
+    }
+
+    function currentSlide(n) {
+      currentSlideIndex = n - 1;
+      showSlides();
+    }
+
+    function nextSlide() {
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+      showSlides();
+    }
+
+    // Auto-advance slides every 5 seconds
+    setInterval(nextSlide, 5000);
+  </script>
+</body>
+</html> 

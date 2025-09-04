@@ -1,0 +1,2922 @@
+ 
+ 
+ 
+DM S 
+t
+ 
+DeviceMan agementSy stemWh itePaper
+ 
+Pr ep ar ed  Fo r:
+ 
+Un it ed  St at es Arm y, Hea dq u art er s,D ep art men t of th e Army(HQDA) D AM I
+-
+CD 
+In it iative D iv
+ 
+Un it ed  Stat es Arm y, Pro gram Executive Off icef or In t elligen ce, Elect ron icWarf are and  Sen sor s 
+(PEO 
+IEW&S), Pr ogr amM an ager Biom et rics
+ 
+DMS 
+t
+ 
+Devic e Man age m en t Syst em
+ 
+Pr oposal &Wh it e Pap er
+ 
+DO O TA  I NDUST RIA L A MERIC A  LLC
+ 
+163 33 S Grea t Oaks D r St e12 4 Rou nd Rock, Te xas 78 681 
+w ww .d oot au s.com
+ 
+UEI # : ZS RXAAN 4K HS3 TIN  #: 80
+-
+0953 472  CAGE COD E:  0X QS0 BUSIN ESS  SIZE
+: SM ALL
+ 
+Sub mi tt ed T o:
+ 
+Rau l Rizzo 76 0
+-
+851
+-
+601 9 rau l.riz zo.ctr @mail.smil.mil
+ 
+Sub mi tt ed By:
+ 
+Al Rh ee ,D irect or of  Bu siness Archit ect 73 7
+-
+292
+-
+809 1 crh ee@do ot au s.com
+ 
+Th isp ro posa l in clu d es inf or mat ion th at sh all n ot b ed isclose d outsid e th e 
+Gover n men t and  sh all 
+not b ed up licat ed ,u sed , or d isclosed  in wh ole or in p art  for  an y 
+p u rp ose oth er t h an t oevalu at e th isp ro posa l or qu ot at ion . If ,h ow ever , a con t ract  is 
+aw arded  as a resu lt  of  or in  con n ect ion w it h th e su b mission  of t h is in for mat ion , th e 
+Gover n men t sh allh a
+veth e righ t t o du p licate,u se, or d isclose t h e d at at oth e ext ent  
+› „} À]ˆ ˚ˆ ]vı Z ˚ „˚ ’µoı ]v}v ı „ı X ]’ „˚ ’ı „]ıˆ }˚v ]ı ıZ ˚v 
+righ t t o u se inf or mat ioncon t ain ed in t his p rop osal or q u ot at ion if it is ob tain ed f rom  
+an oth er sou rce w
+it h ou t rest rict ion . Th e in for mat ion  sub je ct to th is rest riction  is 
+}v ı ]v ˚ˆ ˚˚ıÁ ]ıZ ıZ( }oo}Á ]v ˆ ]’o}’µ „ o˚P˚v ˆ W } ˆ ]’o}’µ „˚ }( 
+in f or mat ion  con t ain ed on  th is shee t is su b je ct tot h e re st rict ion  on t h e t it le p age of 
+ı Z› „}› }’ oX_
+ 
+1.  EXE
+CUTI V E S UM MARY
+ 
+Th eD eviceM an ageme nt Syst em (DM S) is a scalable, cloud
+-
+en ab led p lat f orm d esign ed t o 
+t ran sf or m in du st rial an d t act ical en viron mentsb y st re amlin in g d evice mo nit or in g, 
+main t en an ce, and d ocumen t at ion  man agem en t . Lever agin g re al
+-
+t ime teleme t ry 
+in tegra t ion , 
+mo b ile w or kflow s, and  au t om at ed  netwo rk configu rat ion ,D M S in cre asesop er at ional re liab ilit y, 
+t raceab ilit y, an d efficien cy w h ile red u cin g manu aler ro rs an d d ow nt ime.
+ 
+ ˚› o}Ç˚ˆ ]v ]vˆ µ ’ı „] ˚v À]„}v u}ˆ µ o„ „Z ]ı ˚ıµ„˚ u
+kes it  h igh ly 
+ad apt ab le for d efen seapp licat ion s req u irin g asset man agement , main ten an ce loggin g, and  
+op er at ional re ad iness t rackin g across d ist rib ut ed  in st allat ion s.
+ 
+2.  OB JECT I V ES
+ 
+
+ 
+Pr ovid e a cen t raliz ed  syst emf or mo n it or in g an dman agin g d iverse ind u strial
+ 
+or t act ical 
+d evices.
+ 
+
+ 
+ 
+ 
+
+ 
+En ab le re al
+-
+t imet ele metry d at a int egrat ion for p roa ct ived iagn ost ics and  an alysis.
+ 
+
+ 
+Of f er p ap er less,mo b ile
+-
+b ased maint enan cew or kf low s, in clud in g QR/ b arcod e scann in g.
+ 
+
+ 
+Au t omat e Po rt / IP assignmen t f or large
+-
+scale d ep loyme n t s, min imiz in
+g human  erro r.
+ 
+
+ 
+In t egrat eu ser
+-
+gen er at ed an d aut om at ically gen erat ed d ocu menta tion f ort raceab ilit y.
+ 
+
+ 
+En h an ce wor kf or ce efficien cy b y red u cin g t ime spen t on ma nu ald ata collect ion  an d 
+re p ort in g.
+ 
+3.  TECH NI CAL REQ UIREMEN TS
+ 
+
+ 
+Clou d  arch it ect u re w it h secu re  mu lt i
+-
+t en ant  su ppor t
+ 
+
+ 
+M ob ile int egrat ion  (iOS,An d ro id )
+ 
+
+ 
+QR/ b arcod e scan n in g for d evice id en t if icat ion
+ 
+
+ 
+Of f line d at aloggin gw it h syn c cap ab ilit y
+ 
+
+ 
+Real
+-
+t ime tele met ry p rocessin g f rom  in du st rial sen sor s an d d evices
+ 
+
+ 
+Au t omat ed  Por t/ IP assign mentw ith b u lk man agemen t
+ 
+
+ 
+Do
+cu men t man ageme nt w ith  met ad at at aggin g
+ 
+
+ 
+Se cu rit y: AES
+-
+25 6 en crypt ion , RBAC
+ 
+
+ 
+OS su p por t: Win d ow s Server, Linu x
+ 
+4.  SYSTE M A RCHI TEC TURE
+ 
+DataI n gestion and Telem etry Layer
+ 
+
+ 
+Real
+-
+t ime colle ct ion f rom sen sor s and  in d u st riald evices
+ 
+
+ 
+D at a n ormaliz at ion  an d  
+scalab lep ip elin es
+ 
+Man agem en tand Analytics Layer
+ 
+
+ 
+D ash boa rd s f or device stat u s an d t elem et ry a nalyt ics
+ 
+
+ 
+Clea r Cau se An alysis en gin ef or d iagnost ics
+ 
+
+ 
+Au t omat ed n ot if icat ion sf or p ro act ive main t en ance
+ 
+MobileWor kfl ow Layer
+ 
+
+ 
+M ob ile app f or f ield  loggin g and w or k
+ 
+ord er s
+ 
+
+ 
+QR/ b arcod e scan n in g
+ 
+
+ 
+Of f line mod ew ith  lat er synch ro n iz at ion
+ 
+N etwor kConfigu ration Layer
+ 
+
+ 
+Au t o
+-
+assign men t of P orts an d IP ad d resses
+ 
+
+ 
+Bu lk man agem en t f or large d ep loymen t s
+ 
+Do cum entation Layer
+ 
+
+ 
+User  u p loa d s and  aut o
+-
+gen er at ed d ocu mentat ion
+ 
+
+ 
+ 
+ 
+
+ 
+Clou d  st or age 
+f or accessan d  versio n contr ol
+ 
+5.  TECH NI CAL P RO POSAL OV ERV I EW
+ 
+D M Sd eliver s an all
+-
+in
+-
+one p lat f ormf or d evice man agem en t  in  comp lex environ men t s. It 
+t ran sf or mst rad it ion al main t en an ce operat ion s int o a d igit al, ef f icien t , and t raceab lep ro cess, 
+of f erin g:
+ 
+
+ 
+Cen t raliz ed d evice visib ilit y
+ 
+
+ 
+Red u ced manu ald at a ent ry e rror s
+ 
+
+ 
+Fast er  resp on set imesf or maint enan ce
+ 
+
+ 
+Pa p er less operat ion s su pp or t in g comp lian ce
+ 
+6.  OPERATI ONAL  A DV ANTAGE S
+ 
+
+ 
+Mob i l ity:
+ 
+QR/ barcod e
+-
+based  loggin gf or f ast f ield op erat ion s
+ 
+
+ 
+Rel i ab i li ty:
+ 
+Pa p erless workf low s syn chro n iz ed  with  cloud syst ems
+ 
+
+ 
+T r aceab i li ty:
+ 
+Real
+-
+t ime job t rackin g and h ist orical logs
+ 
+
+ 
+Ef f ici en cy:
+ 
+Aut om at ion red u ceser ro rs and  st af fw or kloa d
+ 
+7.  RELEV ANT ST A N DARDS & C
+OMP LI ANCE
+ 
+
+ 
+N IST SP 800
+-
+53
+ 
+
+ 
+FIPS  140
+-
+2/ 197
+ 
+
+ 
+ISO 2 70 01
+ 
+
+ 
+D oD S TIGs
+ 
+8.  DEV ELOP MEN T TI MEL I NE
+ 
+St age
+ 
+Ta sk
+ 
+D u rat ion
+ 
+1
+ 
+Req u irement s Gath er in g& D esign
+ 
+3 w eeks
+ 
+2
+ 
+D at a Pipelin e Develo p men t
+ 
+4 w eeks
+ 
+3
+ 
+M ob ile Ap p D evelop ment
+ 
+4 w eeks
+ 
+4
+ 
+N etwo rk Configu rat ion  
+Au t om at ion
+ 
+3 w eeks
+ 
+5
+ 
+D ocu men t at ion  Module  Imp lem en t at ion
+ 
+3 w eeks
+ 
+6
+ 
+UI/ UX D evelop men t & Test in g
+ 
+3 w eeks
+ 
+7
+ 
+Syst em V alid at ion & Se cu rit y Hard en in g
+ 
+4 w eeks
+ 
+8
+ 
+D ocu men t at ion  & Train in g Pr ep arat ion
+ 
+2 w eeks
+ 
+T ot al 
+Du r ati o
+n
+ 
+ 
+26  w eeks (~6 
+mon th s)
+ 
+
+ 
+ 
+ 
+9.  ROM 
+C OST ESTI MAT E
+ 
+Cost  Cat egory
+ 
+Amo u nt  (USD )
+ 
+D at a In gest ion & Te lemet ry La yer
+ 
+$2 5,000
+ 
+M ob ile Ap p D evelop ment
+ 
+$2 0,000
+ 
+N etwo rk Configu rat ion  Au t om at ion
+ 
+$1 0,000
+ 
+D ocu men t at ion  Man agemen t M od u le
+ 
+$1 0,000
+ 
+UI/ UX D evelop men t
+ 
+$1 0,000
+ 
+Cybe rsecu rit y 
+Comp lian ce
+ 
+$1 0,000
+ 
+D ocu men t at ion  & Train in g
+ 
+$5 ,000
+ 
+Ye ar
+-
+1 Opt ion al Sup por t
+ 
+$1 0,000
+ 
+Es ti mated T ot al
+ 
+$9 0, 000
+ 
+10.  CON CLUSION
+ 
+Th eD eviceM an ageme nt Syst em (DM S) is a pow erf u l, scalab le p lat f orm design ed t o b rin g 
+d igit al t ran sf ormat ion t ocom p lex 
+en viron ment s. It s int egrat ion of  re al
+-
+t ime t elemet ry, 
+au t omat ed n etwo rk con figu rat ion , mob ile wor kf low s, an d  cen traliz ed d ocu menta t ion 
+man agem en t d elivers sign if icant  op er at ion al ef f icien cies an d d ata
+-
+d riven insigh t s. DM S is fu lly 
+p re p are d f or def en se app l
+icat ion s, of f erin g a robu st f ound at ion f or  asset man agem en t , 
+main t en an ce, and  mission  re ad iness.
+ 
+
+
+ 
+ u›}Á˚„]v P
+ „Pv]Ì } v’ Z„} µ PZ˚„ À]˚ v P]v ˚˚„] vPoµ˚   ˚o˚„ } v
+ 
+ 
+ 
+ 
+ ˚v„ı}}o8] ˚v 
+ 
+oo˚
+ 
+vı˚v v˚
+
+ 
+ 
+ 
+ 
+ 
+ 
+Z ˚ À] ˚ v P˚ u˚vÇ’ı˚u ’ „˚
+r
+ µ „Z ]ı˚ıµ „˚} v oÇÌ]v 
+v ˆ} u› ]o]v ı („} u › o˚ „˚ ’ ( } µ u ˚vı v ˆ˚o˚u˚ı„Ç 
+]v ˆ µ ’ı„]À]„} v u˚vı ’
+ oo}Á’ ’› ˚ ’} ˚} u˚˚o] o˚U ]o˚U 
+ı„˚ o˚U v ˆ]˚vıX 
+
+Z „˚À]}µ ’oÇ ˚˚v ’ıoo˚ˆ v ˆ µ ’ı„] 
+Á} „l’› ˚ ’} ı˚o˚ u˚ı„Ç v ˆ ]ı} „]v ı („} u µ (ı µ „]v ovı’U 
+v oÇÌ]v ı („} u ˚u]  › µ u›’ v ˆ „]À˚„’
+ 
+˚o ]˚o ˚u˚ı„ Ç
+ 
+ 
+
+ 
+ˆµ’ı„]o›o] Z
+Ç’ı˚uv} ˚’ı
+(„} uµ›˚o˚u˚ı„ Ç
+ˆ˚À ı}„}À ]ˆ µ„ı˚
+vˆ(µ(} „u
+ 
+ 
+µu˚vvı˚P „v
+ 
+ 
+
+ 
+}Á} Z
+ ]vı˚P„
+}˚v˚„ı
+ˆ} µu˚vıvˆ} u
+ˆ} µu˚vıP˚v˚„} v
+ o} µˆ} „ ’ } (˚’
+vˆ} „uÀ]o]o]ıÇ
+ 
+ 
+] vı˚vv˚ ’ı}„Ç
+ 
+ 
+
+ 
+ „˚›„ ’ı} v
+]’’µ
+ˆ˚ı˚ı˚›} „ı˚ˆ
+ıZ„} µPZoÇ’
+ÁZ]o ›„}À ]ˆ]vP˚’µ„˚} 
+’} oµ
+ 
+ 
+o o ˚vP˚u˚vı
+ 
+
+ 
+Ç’ı˚u›} 
+Zvˆo]vP} ˆµo„ı˚P„
+}vÇ} µ„ ıZ„} µPZo} µˆ
+Zvˆo]vPo}Á]vP} i˚
+’o]o]ıÇ
+ 
+ 
+}}„ ıl’ ’] P vu˚vı
+ 
+ 
+
+ 
+ ’]u›o].ı˚„(˚} „
+v˚ıÁ} „lıµ›} vP ’o
+ ˚À ] vP˚u˚v „˚ˆµ˚’ 
+ ’›˚v ’˚«vP
+˚„„} „’
+ 
+ 
+ıvˆ„ˆ] Ì˚ˆ}„ lG}Á
+ 
+ 
+
+ 
+o}Á} „ Z ’›˚]o]Ì}v 
+}v
+r
+’]ı uv›}Á Ç 
+’’]Pv]vPı ı} 
+uvP]vPııZ˚„]vPvˆ
+u} „ı}ı˚Zv]}} v’
+ 
+ 
+}Àv’ ooPZı’˚ ’ ˚ „ À˚ ˆX
+
+ Z ]ˆ } µu ˚vı]› „}› „ ]˚ı „ Ç v ˆ} v . ˆ ˚v oX›  „ ı}(ıZ ]u ı˚„ ] ou Ç ˚} › ]˚ˆ„˚› „}ˆ µ ˚ˆU„˚› µ  o]’Z ˚ˆµ › o} ˆ ˚ˆ› }’
+ı˚ˆı„ v ’u ]©˚ˆ 
+
+ 
+}„ˆ ]’ı„ ] µ ı˚ˆ]v vÇ(}„ uÁ]ıZ }µ ı› „ ]}„Á„ ]©˚v› ˚„ u ]’’]}v( „}uv v }À}vXooı„ ˆ ˚u  „ l’U’˚„ À ]˚
+
+u  „ l’ v ˆı„ ˆ ˚v  u ˚„˚(˚„˚vZ ˚„˚]v „˚ ıZ ˚
+
+› „}› ˚„ ıÇ}(ıZ ˚]„„˚’› ˚ À˚}Áv ˚ „’X
+ 
+
+Á Á ÁX
+’˚À
+r
+] vv }À }v ’X 
+ 
+
+}v v ˚ı
+ł’ ˚À
+r
+] v v }À}v ’X }u
+
+
+óïó
+r
+îõî
+r
+ôìó í
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ ]o˚
+r
+’ ˚ˆı˚vv ˚ ››
+o]  } v’W
+
+
+r
+’]ı˚} „l P P]vP l„} ˆ˚ v
+ 
+
+ 
+
+
+ 
+
+› ˚„o˚ ’’ G }Á
+U
+
+„˚ˆ µ ]v 
+˚„„} „’UÇ v Z „} v ]Ì˚ˆ 
+o}µ ˆ 
+ˆ } µ u˚vı
+ 
+
+ 
+ 
+ 
+˚o
+r
+ ]u˚  P P]v P l]vP UÇv Z„} v} µ’ ]ıZ o} µˆ Z} ’ı˚ ˆ u’ı˚ ’
+ 
+
+ 
+ 
+ 
+oo
+r
+
+r
+ v˚ ›]o ]ıÇU 
+µı} uı˚ˆ} „ı]Pvu˚v ]’ı} „˚À]˚ Á’Uˆ} uuµv]  } v
+ 
+P˚u˚vÇ’ı˚u’
+ 
+ 
+ 
+˚ÀX 
+íX ì
+ 
+
+
+ 
+ u›}Á˚„]v P
+ „Pv]Ì } v’ Z„} µ PZ˚„ À]˚ v P]v ˚˚„] vPoµ˚   ˚o˚„ } v
+ 
+ 
+ 
+ 
+ı˚„
+r
+.oı„ › ]o]ˆP˚
+ 
+ 
+ 
+ 
+ 
+ 
+ˆP˚ıµÁ„ ’Ç’ı˚u vZv (} „
+›„} ı v’˚ µ„]ıÇÇÀ˚„P]vP } u›
+˚ı’} vž} „u} 
+o}Á˚˚]PZ vˆÁ ~
+ˆ˚›o}Ç u˚v } u]v ˆÀv]ıÇ’]’U ˆÇ
+u} „›Z} o} PÇ˚’’u˚vıUvˆ L]ı} „’} 
+µ„ı˚oÇı˚ ]u›} ’ı˚„˚ ›˚„P}K]v ]v
+ˆ˚v]„ˆı˚„u]©˚v vˆ} vı˚’ı˚ˆ
+l
+˚vÀ ]„} vu˚vı’X
+ 
+} ]ıµ  } v o„˚ v ˚ ’ˆ ˚ v .˚v }Áv 
+ ˆ ı} „’ ˆ} ’’] o˚ 
+ „˚ ı’
+
+} v
+
+ 
+ 
+ ıZ ˚Ç’ı˚ u oÇÌ˚ ’W
+ 
+ 
+
+ 
+ Ç Z } o}PÇ } v ’]’ı˚v ]˚’
+ 
+
+ 
+˚} „ˆ ’
+ 
+ ]}u˚ ÁıZ o]’ı ’
+ 
+
+ 
+ ıµ „˚ À]
+ 
+ 
+ ıZ ˚Ç’ı˚ u}›   o˚ ˚ı˚  v PW
+ 
+
+ 
+ ˆ ]À]ˆ µ o’ › › „} Z ]v„˚˚ v ]v } ]vı’
+
+} › ˚„]u˚ı˚„
+
+ 
+
+ 
+ ˆ ]À]ˆ µ o’˚„ ]v µ ıZ } „]Ì˚ ˆ v ](} „u v ˆ„} ı˚À˚
+ 
+
+ 
+˚’  ’µ „˚ˆ µ ˚} vÀ ]„} v u˚vı (ı} „’
+ 
+ 
+ Z ˚Ç’ı˚ u ˚ı˚  vÇ } v ’]’ı˚ v  ]˚ „ v }Áv ˆ ı} „’U Z ˚ 
+’Ç’ı˚ u ]oo P˚ v ˚ „ı˚ „˚ o
+r
+ u ˚ ı} }( Ç 
+µ ıZ }„ ]} v(} „ ˚ 
+› „} ı˚  } v
+ 
+ 
+ ˚ v ( Ç]v P Z ˚ „˚  }.oı „ } v˚ „’}v v ˚ o
+ ]’„˚ › „˚ ’˚vı } v
+
+ 
+ 
+ 
+
+ 
+
+ 
+˚„ ]v „} › ˚ µ v ](} „u’ v ˆ 
+ 
+
+ 
+]l]v } vı„ı} } o}  v  › „} .o˚’
+ 
+
+ 
+]˚} Pv ]] oÇ ˚(˚ı˚ˆÇ W
+ 
+
+ 
+ ’l’U ˚À˚„]v P ’
+ 
+
+ 
+Á
+r
+]ooµ u]v } v ˆ} v ’
+ 
+ 
+ ’]ˆ ˚ „ Z „˚ ı’
+ 
+„˚ u ]v v˚ ˚ } ’ ’]Pv ].v
+Àµ ov ˚ „ ]o] ˚} „} „ Á „ˆ
+r
+ˆ ˚ › o}Ç˚ ˆ} „ ˚ ˆ „ ] o
+]v(„’ı„ µ  ıµ „˚
+ 
+ 
+„ . ]oı˚ o o] P˚ v  ˚v › ˚ „ı˚} v ’]’ı˚ vıoÇ ˆ 
+  µ „ı˚ oÇ} ˚ı˚ „ ˆ ı} „ ˆ Z „˚   ˚(} „˚ıZ ˚Ç
+ o˚}µ ˆ u P˚
+ 
+ 
+}Àv’ ooPZı’˚ ’ ˚ „ À˚ ˆX
+
+ Z ]ˆ } µu ˚vı]› „}› „ ]˚ı „ Ç v ˆ} v . ˆ ˚v oX›  „ ı}(ıZ ]u ı˚„ ] ou Ç ˚} › ]˚ˆ„˚› „}ˆ µ ˚ˆU„˚› µ  o]’Z ˚ˆµ › o} ˆ ˚ˆ› }’
+ı˚ˆı„ v ’u ]©˚ˆ 
+
+ 
+}„ˆ ]’ı„ ] µ ı˚ˆ]v vÇ(}„ uÁ]ıZ }µ ı› „ ]}„Á„ ]©˚v› ˚„ u ]’’]}v( „}uv v }À}vXooı„ ˆ ˚u  „ l’U’˚„ À ]˚
+
+u  „ l’ v ˆı„ ˆ ˚v  u ˚„˚(˚„˚vZ ˚„˚]v „˚ ıZ ˚
+
+› „}› ˚„ ıÇ}(ıZ ˚]„„˚’› ˚ À˚}Áv ˚ „’X
+ 
+
+Á Á ÁX
+’˚À
+r
+] vv }À }v ’X 
+ 
+
+}v v ˚ı
+ł’ ˚À
+r
+] v v }À}v ’X }u
+
+
+óïó
+r
+îõî
+r
+ôìó í
+ 
+
+ 
+
+ 
+
+ 
+ u › „˚ Z ˚v ’]À˚ „˚ ˚ı˚  } v
+ 
+ } ı’ Z „˚ı’ À  } ˆ Ç Z } o}PÇUıZ o]’ı’U v ˆ ˚À] ’X
+ 
+
+ 
+} „ u˚ „ ].  } v
+ 
+o]ˆ ı˚ ’ v ](} „u’ v ˆ˚„ À˚v ’ı„µ} v ’X
+ 
+
+ 
+ ]v ˚ˆ P˚˚ ’] o]˚ v  ˚
+ 
+ v ’
+]v ˆ ˚› ˚v ˆ ˚vıoÇ µ P P˚ˆ U ˚v ]˚ˆ U } vı˚’ı˚ˆ«v P ’ X
+ 
+
+ 
+ ’ıvo˚ „ ı’
+ 
+v ˆ ’˚o
+r
+ u˚ }  ’ } v
+
+]v.oı„ı} „’
+
+} lv }Áv ˆ ı} „’X
+ 
+
+r
+]ıµ„˚v˚’’ 
+ 
+ 
+ 
+˚ÀX 
+íX ì
+ 
+
+
+ 
+ u›}Á˚„]v P
+ „Pv]Ì } v’ Z„} µ PZ˚„ À]˚ v P]v ˚˚„] vPoµ˚   ˚o˚„ } v
+ 
+ 
+ 
+ 
+ ˚v„ı}}o8] ˚vı
+ 
+
+vˆoo ]’ ’
+
+ 
+ 
+ 
+ 
+ 
+ 
+} P]’ vP˚u˚vıÇ’ı˚uo›ož} „u Z
+} ›]Ì ’µ››oÇ Z]v ]’]]o]ıÇÀ˚vı}„ Ç} vı„} oU
+ı„v’›}„ı
+uvP˚u˚v vˆÁ„˚Z}µ } ›˚„Çı˚P„vP˚o
+r
+ ˆı
+(„} uU„} ˆ˚Ç’ı˚u˚o]À˚„ vˆ
+r
+ı}
+r
+˚vˆ
+} ›˚„˚8]˚vÇU}’„˚ˆµ v›„}À˚ˆ} „uv˚
+} µı} u˚’
+ 
+„
+v’ ›}„ ıvvP˚u˚vı
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ı} uı„} µı ›ovv]vPvˆ
+„„ o} vV „l
+’Z]›u˚v ]v „v
+uvP „ı} ›]Ì
+ 
+ 
+ 
+„˚Z}µ’ ˚˚„v’
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ vı„}ı} „P˚ } vU
+›]l]vPı„ı˚P]˚u
+’o} «vPV} v]ı} „} „
+›˚„(} „uvvˆ’l
+} u›o˚
+ 
+o Ç’˚
+›}„ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ ’Z} „ˆ ]’µo]Ì}
+l˚Ç} P]’˚ı„]’V˚u›o}Ç
+›„˚ˆ]˚Ç}} „˚’
+ˆ˚uvˆPı
+ˆ]’„µ›
+ 
+ 
+o o ˚vP˚u˚vı
+ 
+
+ 
+
+
+ 
+’Ç’ı˚u ›} 
+Zvˆo]vP} ˆµo„ı˚P„
+}vÇ} µ„˚’
+Á]vP} 
+’oı˚P„
+ 
+ 
+ı vı˚P „vÇ˚„
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ vv˚ı ]vˆ
+ 
+
+›„} ˚’ ˆı˚˚ ˆ’
+(„} uUˆ} ˆ
+’Ç’ı˚u}].›
+Z]vıX
+ 
+ 
+ vÀ˚vı}„ Ç’ ’˚vP˚u˚vı
+ 
+ 
+
+ 
+ „}À ]ˆ„˚o
+r
+À ]’]]o]ıÇ 
+]vı}À˚vı} o˚À’˚
+o} V „lÀ˚u˚v
+ı„˚vˆP˚v˚„ı
+ v„˚›} „ı’X
+ 
+}Àv’ ooPZı’˚ ’ ˚ „ À˚ ˆX
+
+ Z ]ˆ } µu ˚vı]› „}› „ ]˚ı „ Ç v ˆ} v . ˆ ˚v oX›  „ ı}(ıZ ]u ı˚„ ] ou Ç ˚} › ]˚ˆ„˚› „}ˆ µ ˚ˆU„˚› µ  o]’Z ˚ˆµ › o} ˆ ˚ˆ› }’
+ı˚ˆı„ v ’u ]©˚ˆ 
+
+ 
+}„ˆ ]’ı„ ] µ ı˚ˆ]v vÇ(}„ uÁ]ıZ }µ ı› „ ]}„Á„ ]©˚v› ˚„ u ]’’]}v( „}uv v }À}vXooı„ ˆ ˚u  „ l’U’˚„ À ]˚
+
+u  „ l’ v ˆı„ ˆ ˚v  u ˚„˚(˚„˚vZ ˚„˚]v „˚ ıZ ˚
+
+› „}› ˚„ ıÇ}(ıZ ˚]„„˚’› ˚ À˚}Áv ˚ „’X
+ 
+
+Á Á ÁX
+’˚À
+r
+] vv }À }v ’X 
+ 
+
+}v v ˚ı
+ł’ ˚À
+r
+] v v }À}v ’X }u
+
+
+óïó
+r
+îõî
+r
+ôìó í
+ 
+
+ 
+
+ 
+
+ 
+} µ ˆ ˆ v
+r
+› „˚ u ] ˆ ˚ › o}Çu ˚ v ’µ › › } „ ı v ’µ „˚ u o˚  ˚} uÇ
+˚ vÀ] „} v u ˚ v
+ 
+
+ 
+} o˚
+r
+ ’˚ˆ  ˚} vı „} o ˆ
+r
+ v  „ Ç› } v ˚ o]À˚ „  µ „˚ U ˚ › ˚ v ˆ  o˚ 
+} › ˚ „ } v ’X
+ 
+
+ 
+˚ o
+r
+ u ˚ „ l]v P 
+]vÀ˚ vı} „ Ç ˆ ]› u ˚ v ’Çv  Z „} v ]Ì˚ ]ıZ ’ı˚ „} „ˆ} „ 
+} u › o˚ı˚ ˆ ] ı„]o’X
+ 
+
+ 
+ˆ Àv  ˚ ˆ oÇ  ˆ ›u ]Ì˚ ˆ} „ lG} Á „ ]À˚} ’ ’ À]v P ˆ µ „ ˚ 
+µ o]Ì } v X
+ 
+
+˚u˚vÇ’ı˚u’
+ 
+˚ÀX 
+íX ì
+ 
+
+ 
+ 
+ 
+ 
+TACTILINK 
+t
+ 
+TacticalVoice Intelligen ce Platform W hite 
+Paper
+ 
+Pr ep ar ed  Fo r:
+ 
+Un it ed  Stat es Arm y, Head q u art er s, Dep art men t of  th eArm y (HQDA)
+ 
+D AM I
+-
+CD In it iat ive D iv
+ 
+Un it ed  Stat es Arm y, Pro gram Executive Off icef or In t elligen ce, Elect ron icWarf are and  
+Sen sor s 
+(PEO IEW&S), Pr ogr amM an ager Biom et rics
+ 
+T A CTI LI NK 
+t
+ 
+T act i cal Voice I n tell i gen ce Platfor m
+ 
+Pr op osa l & Wh it e Pap er
+ 
+DO O TA  I NDUST RIA L A MERIC A  LLC
+ 
+16 333 S Grea t Oaks D r Ste 124
+ 
+Rou n d Rock, Te xas 786 81
+ 
+w ww .d oot au s.com
+ 
+UEI # : ZS RXAAN 4K HS3
+ 
+TIN  #: 80
+-
+0953 472
+ 
+CAGE COD E:  0X QS0
+ 
+BUSIN ESS  SIZE : SM ALL
+ 
+Sub mi tt ed T o:
+ 
+Rau l Rizzo
+ 
+760
+-
+851
+-
+6019
+ 
+rau l.rizz o.ctr @mail.smil.mil
+ 
+Sub mi tt ed By:
+ 
+Al Rhe e, D irect or of Bu sin ess Arch it ect
+ 
+737
+-
+292
+-
+8091
+ 
+crh ee @d oot au s.com
+ 
+Th isp ro posa l in clu d es inf or mat ion th at sh all n ot b ed isclose d ou
+t sid e th e 
+Gover n men t and  sh all not b ed up licat ed ,u sed , or d isclosed  in wh ole or in p art  for  an y 
+p u rp ose oth er t h an t oevalu at e th isp ro posa l or qu ot at ion . If ,h ow ever , a con t ract  is 
+aw arded  as a resu lt  of  or in  con n ect ion w it h th e su b mission  of t h is in for
+mat ion , th e 
+Gover n men t sh allh aveth e righ t t o du p licate,u se, or d isclose t h e d at at oth e ext ent  
+› „} À]ˆ ˚ˆ ]vı Z ˚ „˚ ’µoı ]v}v ı „ı X ]’ „˚ ’ı „]ıˆ }˚v ]ı ıZ ˚v 
+righ t t o u se inf or mat ioncon t ain ed in t his p rop osal or q u ot at ion if it is
+ 
+ob tain ed f rom  
+an oth er sou rce w it h ou t rest rict ion . Th e in for mat ion  sub je ct to th is rest riction  is 
+}v ı ]v ˚ˆ ˚˚ıÁ ]ıZ ıZ( }oo}Á ]v ˆ ]’o}’µ „ o˚P˚v ˆ W } ˆ ]’o}’µ „˚ }( 
+in f or mat ion  con t ain ed on  th is shee t is su b je ct tot h e re st rict ion  on t h e t it le
+ 
+p age of 
+ı Z› „}› }’ oX_
+ 
+
+ 
+ 
+ 
+ 
+SEV A Inn ovat ion s Logo
+ 
+SEV A Innov at ions Logo
+ 
+© 20 25 SEV A In novat ions LLC. A ll right s re served . Th isd ocu ment  isp rop riet ary an d  
+con f ident ial. Nop art of th is mater ialmay b e cop ied , rep rod u ced , rep ub lish ed , up loa ded , 
+p ost ed ,t ran sm
+it ted , or dist ribu t ed  in  an y f ormw it h ou t p riorw ritt en p ermission  fro m SEV A 
+In n ovat ion s LLC. A ll t radema rks, se rvice mar ks, an d t raden ame s ref ere n ced h er ein  are th e 
+p ro per t yof t heir  resp ective own er s.
+ 
+1.  EXECUTI V E S UM MARY
+ 
+TA CTILIN K is an  ad van ced  p lat fo
+rmen ab lin gre al
+-
+t ime voice int elligen ce an d  in tegra t ion  
+b etwe en  legacy rad io n et w or ks an d mo der n d igital syst ems. It t ran sf ormst act ical 
+com mu n ication int o act ion ab le dat a, b rid gin g voice st re ams w it h d igital com man d syst ems.
+ 
+2.  OB JECT I V ES
+ 
+
+ 
+Con vert rad io v
+oice st re ams t o t ext for  an alysis and  logs.
+ 
+
+ 
+D et ect  op er at ion al keywor d sf or  in st an t ale rt in g.
+ 
+
+ 
+En ab le voice
+-
+con t rolle dau t omat ion  of  mission hard w are.
+ 
+
+ 
+In t egrat e seamle ssly w ith  netwo rked syst emst h rou gh  secu re AP Is.
+ 
+3.  TECH NI CAL REQ UIREMEN TS
+ 
+
+ 
+Sp ee ch
+-
+to
+-
+t ext  en gin e (e.g.
+ 
+Wh isp er ST T)
+ 
+
+ 
+Ed ge comp ut in g on N V IDIA Je t son h ardw are
+ 
+
+ 
+REST f u l AP Isf or d ata integra t ion
+ 
+
+ 
+AES
+-
+256 en crypt ion f or st or ed  an d t ran smitt ed dat a
+ 
+4.  SYSTE M A RCHI TEC TURE
+ 
+Secu reSerialCommun ic ation Layer
+ 
+
+ 
+RS
+-
+232C
+-
+b ased com mun icat ion f or 
+legacy rad ios.
+ 
+
+ 
+Err or d etect ion  an d  secure  loggin g.
+ 
+API In tegration Layer
+ 
+
+ 
+Con vert s ser iald at a int oJSON  for  exter n al syst ems.
+ 
+
+ 
+Su p por t s Web Socket  an d M QTT com mun icat ion s.
+ 
+Voic eIn telligenc eEngin e
+ 
+
+ 
+Tr an scrib es voicet ot extin  re al t ime.
+ 
+
+ 
+Tr iggers act ion sb as
+ed on  sp oken  com man d s.
+ 
+
+ 
+St or esen crypt ed logsf or au d it in g.
+ 
+
+ 
+ 
+ 
+ 
+5.  TECH NI CAL P RO POSAL OV ERV I EW
+ 
+TA CTILIN K mer ges p roven  com mun icat ion t echn ology w ith  mod ern  AI sp eech  cap ab ilit ies, 
+p ro vid in g:
+ 
+
+ 
+Real
+-
+t ime voicet ran script ion
+ 
+
+ 
+Au t omat ed  even t re cognit ion f rom  keyw ord
+s
+ 
+
+ 
+V oice
+-
+act ivat ed contr ol for  conne ct ed d evices
+ 
+
+ 
+In t egrat ion w it h mod er nmission  syst ems
+ 
+6.  OPERATI ONAL  A DV ANTAGE S
+ 
+
+ 
+Fast er  sit u at ion al aw aren ess f rom  voice t raf f ic
+ 
+
+ 
+Red u ced operator w or kloa d
+ 
+
+ 
+En h an ced mission re spon siven ess
+ 
+
+ 
+Se cu re  in t egrat ion  in to 
+bro ad er d igit al ecosystems
+ 
+7.  DEV ELOP MEN T TI MEL I NE
+ 
+St age
+ 
+Ta sk
+ 
+D u rat ion
+ 
+1
+ 
+Req u irement s Analysis
+ 
+2 w eeks
+ 
+2
+ 
+Sp ee ch
+-
+to
+-
+Te xt D evelo pmen t
+ 
+4 w eeks
+ 
+3
+ 
+Se rial Com mu n icat ion Int egra t ion
+ 
+3 w eeks
+ 
+4
+ 
+AP I La yer Imp lem en t at ion
+ 
+3 w eeks
+ 
+5
+ 
+UI D evelop ment &Te st ing
+ 
+3 
+w eeks
+ 
+6
+ 
+Syst em V alid at ion
+ 
+2 w eeks
+ 
+7
+ 
+D ocu men t at ion  & Train in g
+ 
+2 w eeks
+ 
+T ot al Du r ati on
+ 
+ 
+19  w eeks (~5 month s)
+ 
+8.  ROM C OST ESTI MAT E
+ 
+Cost  Cat egory
+ 
+Amo u nt  (USD )
+ 
+Sp ee ch
+-
+to
+-
+Te xt D evelo pmen t
+ 
+$1 00 ,00 0
+ 
+RS
+-
+23 2C Com mu n icat ion M od u le
+ 
+$5 0,000
+ 
+AP I D esign  an d  
+In t egrat ion
+ 
+$5 5,000
+ 
+Ed ge Hard w are Int egrat ion
+ 
+$4 0,000
+ 
+UI/ UX D evelop men t
+ 
+$3 0,000
+ 
+Cybe rsecu rit y Comp lian ce
+ 
+$2 5,000
+ 
+D ocu men t at ion  & Train in g
+ 
+$1 5,000
+ 
+Ye ar
+-
+1 Opt ion al Sup por t
+ 
+$2 0,000
+ 
+
+ 
+ 
+ 
+ 
+Cost  Cat egory
+ 
+Amo u nt  (USD )
+ 
+Es ti mated T ot al
+ 
+$3 35 ,00 0
+ 
+9.  CONCL USI ON
+ 
+TA CTILIN K d elivers a 
+t actical ad vant ageb y tran sf ormin gt rad it ion al voice ch an nels in t o d igit al 
+in t elligen ce,en ab lin g rapid , secure decision s in d yna mic en viron ment s.
+ 
+
+
+ 
+ u›}Á˚„]v P „Pv]Ì } v’ Z„} µ PZ˚„ À]˚ v P]v ˚˚„] vPoµ˚   ˚o˚„ } v
+ 
+ 
+ 
+ 
+Æı
+r
+ v˚ „ }v µ„ }uuµv]ı„ı˚oo]P˚v ˚
+ 
+(vÀ]„}vu˚ vı’
+ 
+ 
+ 
+ 
+ 
+ 
+Z ˚ } ]˚ vı˚oo] P˚v  ˚ ož} „u ’ v ˆ Àv ˚ ˆ U 
+r
+oÇ ˚„˚ˆ 
+} u uµ v ] v ˆ µ ı} u } v ˚’]Pv˚ˆ} u} ˆ ˚ „v ]Ì˚ ˚oˆ 
+} › ˚„ ’ Ç „]ˆ o˚PÇˆ ’Ç’ı˚u’ Á]ıZ ]P]ı ]vı˚ oo]P˚v  ˚U ˚µ „˚ ı
+Z v ˆ o]vP U v ˆ} ]˚
+r
+ Àı˚ˆ } vı„} µ › } v} µv ˆ  (o]ˆ ı˚ˆ
+r
+ } u uµ v ] „} ı} } o ’
+
+v ˆÆ› v ˆ ˚ˆ(µ ’ v ˆ 
+r
+ˆ „]À˚v 
+’› ˚˚ Z˚} Pv ] U „v ’ (} „u’ } Á]ı „ÇU ˚„P˚v  Ç˚’› } v ’˚U v ˆ 
+]v ˆ µ ’ı„] › ˚„ ’} ]˚U ıU v ˆ ˚À]˚} } „ˆ ]v  ]PZ
+r
+’ıl˚’
+˚vÀ]„} v u˚vı ’X
+ 
+î
+˚ P „
+
+ Ç˚ „
+ 
+
+ 
+„v’oı˚ ’˚„ ]
+} uuµv]  } vı
+’ı„˚v ı}ı„µ ıµ „˚ˆU 
+r
+˚v } ˆ˚ˆ
+v’} v’X
+ 
+
+ 
+vˆ ›} ]vı’ l’˚vˆU˚ ˚ ]À˚U’ııµ’U 
+lo} P U} v. Pvo˚o
+r
+ u˚
+} } „ˆ]v } v ]ıZ uuvˆ } vı„} o
+~ož} „u’ˆ o} µ ˆ˚„ À]˚’ X
+ 
+
+ 
+µ› ›} „ı’] ˆ]„˚ } v} uuµv]  } v
+
+Á ]ıZo
+r
+ıZ„˚ˆ˚ ˆv ˆo˚„’ ˆ’’P˚
+„} l˚„]vP˚}  l˚ı’U 
+ 
+ › } v
+ 
+
+ 
+ ›˚„o˚ } ıZ} vv ˚ ı˚ˆ ˚X PXU˚
+vˆ
+r
+P›› ˚ˆ vÀ]„} vu˚vı’X
+ 
+˚Ç ›  ]o ] ˚ ’W
+ 
+
+ 
+ vo˚’ ’˚uo˚ ’’ }Á ı
+(„} ˚oˆv]ı’ ı}} uuvˆ ˚vı˚„’X
+ 
+
+ 
+}À]ˆ˚’
+
+’ ˚ µ„˚ vˆ oo˚
+} uuµv] } v(„’ı„µ ı µ„˚} „Ç„]ˆ
+ˆ˚›o}Çu ˚vı’X
+ 
+
+ 
+ vZv ˚’ı˚„} ›˚„]o] ]ıZ } ˆ˚„v
+Ç’ı˚u ’ˆ ’’]} v ˆ’Z } „ˆ’X
+ 
+ï
+
+}]˚
+r
+„ ]À˚ v o
+
+ı˚ oo ]P˚ v˚ vP ]v˚
+ 
+
+ 
+ vÀ˚„ı’ ˆ]}} ] ˚ı„˚ u’ı} 
+„˚o
+r
+ u˚˚Æ ’]v P Z]’ ›˚vP] v˚X
+ 
+
+ 
+ı˚ ı’ ›˚„ } v˚ÇÁ} „ˆ’ ˆı}
+r
+o} P’
+ „] À˚vı’X
+ 
+
+ 
+ vo˚’} ] ˚
+r
+ı}
+r
+ } v} vı„} o}„} v˚’U 
+’˚v’} „’Uu’U ˆ ıZ˚ ’’]} v
+Z„ˆÁ„˚
+
+ı˚„( ˚’X
+ 
+
+ 
+ ›˚„ı˚’ vˆ ˚›˚ vˆ˚vıo ˚ ˚ ˆP˚
+ı’} v ˆµo˚ ’ ]ıZ˚o
+]vı˚P„ } vX
+ 
+
+ 
+ı} „˚’ } ıZˆ ]}ˆ˚Æ} P’ ]vv „ Ç›ı˚ˆ
+(} „u}˚o
+r
+ u˚ v]ı} „] vP} „˚v’] 
+voÇ’] ’X
+ 
+˚Ç ›  ]o ] ˚ ’W
+ 
+
+ 
+ vo˚’ ’˚uo˚ ’’ }Á 
+ı ı „} 
+. ˚oˆv ]ı’}} uuvˆ ˚vı˚„’X
+ 
+
+ 
+}À]ˆ˚’ ˚ µ„˚ vˆ oo˚
+} uuµv] } v(„’ı„µ ı µ„˚} „Ç„]ˆ
+ˆ˚›o}Çu ˚vı’X
+ 
+
+ 
+ vZv ˚’ı˚„} ›˚„]o] ]ıZ } ˆ˚„v
+’Ç’ı˚u ’ˆ ’’]} v ˆ’Z } „ˆ’X
+ 
+˚ µ„˚˚ „ ]o }uuµ v] }v
+ Ç˚„
+ 
+
+ 
+ vo˚’ ›} ]vı
+r
+ı}
+r
+›} ]vˆ„} ˆ ’ o˚
+ı„v’(˚ˆ˚Æ À˚
+r
+îï 
+ 
+
+ 
+ ˆµo„U „} ’’
+r
+›ož}} LÁ„˚µ› ›} „ı’
+ ]vˆ}Á’ ]v µÆ ]ı Z ˆ ıZ} vU 
+}Á˚ Z˚o o X
+ 
+
+ 
+ı˚P„ı˚ˆ ]ı Z Z˚ l’µuUo]ˆ } vU 
+vˆ
+
+„˚o
+r
+ u˚
+
+(„Pu˚vı } vl„˚’ ’˚uo
+o} P] X
+ 
+
+ 
+ u› o˚ ]ıZ ˆ]} ’ ˚ X PXU 
+
+r
+ı}
+r
+’ ˚„] ˆ›ı˚„’
+~
+r
+
+ 
+
+ 
+’ı}
+r
+o ˚’ v’µ„˚ P P˚ˆ]Ì˚ˆ
+. ˚oˆ˚ ›o}Çu˚vıX
+ 
+˚Ç ›  ]o ] ˚ ’
+W
+ 
+
+ 
+˚’’ ]} v
+r
+’ ˚ˆ} uuµv]  } v ]ıZ
+ u˚} µı’U
+
+]ˆ˚v} vı„} oUˆ˚ ˆ
+„˚ ˚]›ı’X
+ 
+
+ 
+ K ]v˚ı} „P˚ˆ˚ı„v’ u]’’]} v
+µ+˚} ’’]} v’]o ]˚v ˚X
+ 
+
+ 
+
+r
+v „ Ç›ı˚ˆ ’˚«v P’ ˆ˚„
+r
+˚À]ˆ˚v} P’} ˚ µ„˚ ›˚„ } v ’X
+ 
+o}]˚ı˚ oo]P˚ v ˚ ož}„ u
+ 
+˚ µ„˚˚„ ] o 
+ }uuµ v]
+ Ç˚„
+ 
+}]˚
+r
+„ ]À˚oı˚ oo]P˚ v˚P]v˚
+ 
+ (µo
+vı˚ P„ Ç˚„
+ 
+}Àv’ ooPZı’˚ ’ ˚ „ À˚ ˆX
+
+ Z ]ˆ } µu ˚vı]› „}› „ ]˚ı „ Ç v ˆ} v . ˆ ˚v oX›  „ ı}(ıZ ]u ı˚„ ] ou Ç ˚} › ]˚ˆ„˚› „}ˆ µ ˚ˆU„˚› µ  o]’Z ˚ˆµ › o} ˆ ˚ˆ› }’
+ı˚ˆı„ v ’u ]©˚ˆ 
+
+ 
+}„ˆ ]’ı„ ] µ ı˚ˆ]v vÇ(}„ uÁ]ıZ }µ ı› „ ]}„Á„ ]©˚v› ˚„ u ]’’]}v( „}uv v }À}vXooı„ ˆ ˚u  „ l’U’˚„ À ]˚
+
+u  „ l’ v ˆı„ ˆ ˚v  u ˚„˚(˚„˚vZ ˚„˚]v „˚ ıZ ˚
+
+› „}› ˚„ ıÇ}(ıZ ˚]„„˚’› ˚ À˚}Áv ˚ „’X
+ 
+
+Á Á ÁX
+’˚À
+r
+] vv }À }v ’X 
+ 
+
+}v v ˚ı
+ł’ ˚À
+r
+] v v }À}v ’X }u
+
+
+óïó
+r
+îõî
+r
+ôìó í
+ 
+
+ 
+
+ 
+
+ 
+’Ç ˚ıµ › „}vÇvÀ] „} v u ˚ vı
+ 
+’ıoo ’µ ] lo ]ıZ oµP
+r
+ vˆ
+r
+› o } vo]ıÇ
+v
+v}›˚ ]o ]Ì˚
+ˆ]v]vP „˚‰ µ]„˚ ˆX
+ 
+
+ 
+˚ „
+r
+ ]˚ v ˆ o Çı˚ „ ( ˚
+ 
+ıµ] À˚˚ ’]P vı’ ’˚„’ › ˚„ı˚˚„] Uˆ} ] ˚˚ı µ„˚’ ]ıZ]u oµ] ˆv ˚X
+
+
+ 
+
+ 
+˚ o] o˚Ç ÁZ ˚ „˚ UvÇ u ˚
+ 
+} „l’À˚v ˆ]’} v v˚ ı˚ ˆµ P P˚ˆvÀ]„} vu˚vı’
+v
+µ ı} u o o›ı’} ˚ ˚oˆX
+ 
+
+ 
+˚  µ „˚ } ˚ }Æ
+ 
+oı
+r
+]v v „ Ç› } vˆ  ˚’’} vı„} ov’µ„˚ ’(˚ ]ı Z} µ} u› o]ı˚ ˆ} v. Pµ„ } v’X
+ 
+}]vı˚oo]Pž}„u
+ 
+ 
+ 
+˚ÀX 
+íX ì
+ 
+
+ 
+ 
+ 
+ 
+AI
+-
+Based S ituational Awareness S ystem
+ 
+Pr ep ar ed  Fo r:
+ 
+Un it ed  Stat es Arm y, Head q u art er s, Dep art men t of  th eArm y (HQDA),
+ 
+D AM I
+-
+CD In it iat ive D iv
+ 
+Un it ed  Stat es Arm y, Pro gram Executive Off icef or In t elligen ce, Elect ron icWarf are and  Sen sor s 
+(PEO IEW&S), 
+Pr ogr amM an ager Biom et rics
+ 
+AI
+-
+Based Situ ation al A war en ess Syst em
+ 
+Pr op osa l & Wh it e Pap er
+ 
+DO O TA  I NDUST RIA L A MERIC A  LLC
+ 
+16 333 S Grea t Oaks D r Ste 124,
+ 
+Rou n d Rock, Te xas 786 81
+ 
+w ww .d oot au s.com
+ 
+UEI # : ZS RXAAN 4K HS3
+ 
+TIN  #: 80
+-
+0953 472
+ 
+CAGE COD E:  0X QS0
+ 
+BUSIN ESS  SIZE
+: SM ALL
+ 
+Sub mi tt ed T o:
+ 
+Rau l Rizzo
+ 
+760
+-
+851
+-
+6019
+ 
+rau l.rizz o.ctr @mail.smil.mil
+ 
+Sub mi tt ed By:
+ 
+Al Rhe e, D irect or of Bu sin ess Arch it ect
+ 
+737
+-
+292
+-
+8091
+ 
+crh ee @d oot au s.com
+ 
+Th isp ro posa l in clu d es inf or mat ion th at sh all n ot b ed isclose d outsid e th e 
+Gover n men t and  sh all 
+not b ed up licat ed ,u sed , or d isclosed  in wh ole or in p art  for  an y 
+p u rp ose oth er t h an t oevalu at e th isp ro posa l or qu ot at ion . If ,h ow ever , a con t ract  is 
+aw arded  as a resu lt  of  or in  con n ect ion w it h th e su b mission  of t h is in for mat ion , th e 
+Gover n men t sh allh a
+veth e righ t t o du p licate,u se, or d isclose t h e d at at oth e ext ent  
+› „} À]ˆ ˚ˆ ]vı Z ˚ „˚ ’µoı ]v}v ı „ı X ]’ „˚ ’ı „]ıˆ }˚v ]ı ıZ ˚v 
+righ t t o u se inf or mat ioncon t ain ed in t his p rop osal or q u ot at ion if it is ob tain ed f rom  
+an oth er sou rce w
+it h ou t rest rict ion . Th e in for mat ion  sub je ct to th is rest riction  is 
+}v ı ]v ˚ˆ ˚˚ıÁ ]ıZ ıZ( }oo}Á ]v ˆ ]’o}’µ „ o˚P˚v ˆ W } ˆ ]’o}’µ „˚ }( 
+in f or mat ion  con t ain ed on  th is shee t is su b je ct tot h e re st rict ion  on t h e t it le p age of 
+ı Z› „}› }’ oX_
+ 
+ 
+
+ 
+ 
+ 
+ 
+1.  E
+XECUTI V E S UM MARY
+ 
+Th e 
+AI
+-
+Based Sit u ati on al A w ar en ess Syst em
+ 
+is au n if ied , ad van ced  solution  design ed  to 
+en h an ce op er at ion al read in ess an d re al
+-
+t ime int elligen ce cap ab ilit ies in D ep art men t of  Def en se 
+(Do D ) tact ical an d  st rat egic en viron ments. Int egrat in g cu t
+t in g
+-
+ed ge t ech nolo gies
+v
+in clu d in g 
+f acial re cogn it ion ,ob je ct d et ect ion , au tom at ic spee ch  re cogn it ion  (ASR), sp ee ch
+-
+to
+-
+t ran slat ion , 
+an d  sp ea ker d iariz at ion
+v
+t he syst em d elivers mu lt i
+-
+d om ain  sit u at ion al aw are ness cru cialf or 
+mo d ern b att lef ield operat ion s.
+ 
+Th is
+ 
+solu t ion op erat es effe ct ively e ven  in  con t ested  or degra d ed n etwo rken vironments, 
+p ro vid in g ed ge in f ere n ce cap ab ilit iesan d secur e synch ro n iz at ion w it h  comman d syst emsw h en  
+con n ect ivit y is rest ored .Th ep latf or m emp owersD oD p er son nelw ith  real
+-
+t ime, au to
+mated  
+an alysis and  act ion ab le in t elligen cet oen su re  mission  su ccess.
+ 
+ 
+2.  OB JECT I V ES
+ 
+
+ 
+D evelop  dep loyab leAI mod elsf or :
+ 
+o
+ 
+Facial re cogn it ion
+ 
+o
+ 
+Ob je ct d etect ion  an d t rackin g
+ 
+o
+ 
+Au t omat ic sp ee ch re cogn it ion  (ASR)
+ 
+o
+ 
+Sp ee ch
+-
+to
+-
+t ran slat ion f or cro ss
+-
+lan gu ageop er at ion s
+ 
+o
+ 
+Sp ea ker d iarizat ion f or d ist in gu ish in gin divid u als in  mu lt i
+-
+sp ea ker  scen arios
+ 
+
+ 
+In t egrat e an d fu sed at a fro m mult i
+-
+mo d al sources, in clud in g:
+ 
+o
+ 
+Ele ct ro
+-
+optical an d  in f rared  video f eed s
+ 
+o
+ 
+Rad ar (includ in g SAR)
+ 
+o
+ 
+Acou st ic an d seismic sensor s
+ 
+o
+ 
+RF sp ect ru m mon itor in g
+ 
+
+ 
+En
+ab le re al
+-
+t ime alert in g an d visu aliz at ion of th reat s and events
+ 
+
+ 
+Su p por t secur e, b an dw idt h
+-
+efficient  syn ch ron iz at ion w ith  com man d cent ers
+ 
+
+ 
+D eliver op erat ion alf lexib ilit yf or :
+ 
+o
+ 
+Ed ge comp ut in g on t act ical h ardw are
+ 
+o
+ 
+Clou d
+-
+b ased an alyt ics wh en 
+con nect ivit yallo w s
+ 
+
+ 
+Pr ovid e mod u lar AP Is and  SD Ks f or int egrat ion w it h oth er d ef en se syst ems
+ 
+ 
+3.  TECH NI CAL REQ UIREMEN TS
+ 
+
+ 
+AI Fra meworks:
+ 
+o
+ 
+PyT or ch /  Ten sor Flow f or mo del develop ment and  dep loymen t
+ 
+o
+ 
+Op en CV f or re al
+-
+t ime video  analysis
+ 
+
+ 
+Hard w are accele rat ion su p p
+or t:
+ 
+
+ 
+ 
+ 
+ 
+o
+ 
+N V ID IA Jet son
+ 
+o
+ 
+In t elM ovid iu s
+ 
+o
+ 
+AM D  ROCm GPUs
+ 
+
+ 
+M u lt i
+-
+th re ad ed  p rocessin g for  con cu rren t  vid eo st re ams
+ 
+
+ 
+Se cu re  com mu n icat ion in t erf aces:
+ 
+o
+ 
+REST f u l and  gRPC en dp oin t s
+ 
+o
+ 
+TL S 1.3 en crypt ion
+ 
+
+ 
+Role
+-
+Based  Access Con t rol (RBAC) an d  com pre hen sive loggin g
+ 
+
+ 
+D at a 
+st and ard s com pliance:
+ 
+o
+ 
+JSON  / XM Lf or st ru ct ured  d at aexch an ge
+ 
+o
+ 
+ST AN AG46 09 for  vid eo met adat a
+ 
+
+ 
+OS Su pp ort :
+ 
+o
+ 
+Lin u x (RHEL 8+ , Ub un tu 22 +)
+ 
+o
+ 
+Win d ow s Se rver  201 9+
+ 
+ 
+4.  SYSTE M A RCHI TEC TURE
+ 
+Ed geAn alytic s Layer
+ 
+
+ 
+Host s AI inf eren ce mod els f or re al
+-
+t ime object and  
+f acial d et ect ion , scen eclassif icat ion , 
+an d  vid eo su mmar iz at ion .
+ 
+
+ 
+Run s on  low
+-
+p owerh ardw are  su it ab lef or for w ard  dep loymen t s.
+ 
+DataFu sion Layer
+ 
+
+ 
+M er ges mu lt i
+-
+sen sor  in pu t sf or enh an ced  situ ation al aw aren ess.
+ 
+
+ 
+Pe rf orms confiden ce scorin g an d  geo
+-
+t aggin gf ord
+et ect ed objects an d even t s.
+ 
+Commu n ic ation & Sec urityLayer
+ 
+
+ 
+M an ages secur e com mun icat ion  wit h Com man d & Con t rol (C2) syst ems.
+ 
+
+ 
+Su p por t s operat ion across J WICS, SIPRN et , and  ap p ro ved  com mer cialn etwo rks.
+ 
+
+ 
+Pr ovid es end
+-
+to
+-
+en d en crypt ion  an d  sessio n  loggin g.
+ 
+Use
+r In terf ac eLayer
+ 
+
+ 
+D isp lays live vid eo fee d sw ith  ove rlays, ale rt s, a nd in ter act ive map s.
+ 
+
+ 
+Com p at ib lew ith  st and ard  b row sers and  ru gged ized t act icald isp lays.
+ 
+ 
+
+ 
+ 
+ 
+ 
+5.  TECH NI CAL P RO POSAL OV ERV I EW
+ 
+Th isp ro posa l in t rod u cesa mo du larAI arch it ectu re th at com b in es s
+t at e
+-
+of
+-
+t he
+-
+art  comp ut er  
+vision  and  sp ee ch t ech nolo giesw ith  secure commu n icat ion san d u ser
+-
+frien d ly in ter f aces.Th e 
+syst em w ill:
+ 
+
+ 
+D eliver re al
+-
+t ime th re at d et ect ion a nd  aler t s
+ 
+
+ 
+Red u cef alsep ositives thro u gh mu lt i
+-
+mod el en semb le AI
+ 
+
+ 
+Of f er con f igu rab let h rea t
+ 
+t h resh old sf or d iff er en tmission  scen ario s
+ 
+
+ 
+Pr ovid e p ost
+-
+mission  replay f or an alysis an d d eb rief in g
+ 
+
+ 
+En su re f lexib le in tegra t ion  for f ut u re sen sor s and d at a t ype s
+ 
+ 
+6.  OPERATI ONAL  A DV ANTAGE S
+ 
+
+ 
+Au t on om ou s mon it or in gof  mission
+-
+crit ical are as
+ 
+
+ 
+Red u ced 
+cogn it ive load for  hu man operator s
+ 
+
+ 
+En h an ced  sit u at ion al aware n essu nd er d egrad edcom mu n ication s
+ 
+
+ 
+Rap id d ep loyme nt  on  varied t act icalh ardw are
+ 
+
+ 
+Fu ll comp lian ce w it h D oD  cybe rsecurit y an d d at a p rot ect ion  st and ard s
+ 
+ 
+7.  RELEV ANT ST A N DARDS & C OMP LI ANCE
+ 
+
+ 
+M IL
+-
+ST D
+-
+1
+88
+-
+220D  
+t
+ 
+Ta ct ical d at a commu n icat ion s
+ 
+
+ 
+ST AN AG46 09 
+t
+ 
+D igit al mot ion  image ry st an d ard s
+ 
+
+ 
+N IST SP 800
+-
+53 
+t
+ 
+Se cu rity con t ro ls f ramework
+ 
+
+ 
+FIPS  140
+-
+2/ 197 
+t
+ 
+Crypt ograp h ic st and ard s
+ 
+
+ 
+D oD S TIGs 
+t
+ 
+Se cu rit y h ard en in g an d  comp lian ce
+ 
+ 
+8.  DEV ELOP MEN T TI MEL I NE
+ 
+St age
+ 
+Ta sk
+ 
+D u rat ion
+ 
+1
+ 
+Req u irement s Analysis & S yst emD esign
+ 
+3 w eeks
+ 
+2
+ 
+AI M od el Train in g & Testin g
+ 
+5 w eeks
+ 
+3
+ 
+Ed geD evice Int egrat ion
+ 
+3 w eeks
+ 
+4
+ 
+M u lt i
+-
+sen sor D at a Fu sion Imp lem en t at ion
+ 
+3 w eeks
+ 
+5
+ 
+UI D evelop ment &V isu aliz at ion
+ 
+3 w eeks
+ 
+6
+ 
+Syst em Te st in g & 
+V alid ation
+ 
+3 w eeks
+ 
+7
+ 
+D ocu men t at ion  &D elivery P re parat ion
+ 
+2 w eeks
+ 
+
+ 
+ 
+ 
+ 
+St age
+ 
+Ta sk
+ 
+D u rat ion
+ 
+T ot al Du r ati on
+ 
+ 
+22  w eeks
+ 
+ 
+9.  ROM C OST ESTI MAT E
+ 
+Cost  Cat egory
+ 
+Amo u nt  (USD )
+ 
+Facial Recogn it ion M od ule D evelop ment
+ 
+$3 00 ,00 0
+ 
+Ob je ct D etect ion  Module D evelop men t
+ 
+$2 50 ,00 0
+ 
+Au t omat ic Sp ee ch Recogn it ion  (ASR)
+ 
+$2 00 ,00 0
+ 
+Sp ee ch
+-
+to
+-
+Tr an slat ion
+ 
+$1 40 ,00 0
+ 
+Sp ea ker D iarizat ion
+ 
+$1 50 ,00 0
+ 
+Sub to tal of Co mp on en tMar ket Pr i ces
+ 
+$1 ,0 40, 000
+ 
+Less 15 % Int egrat ed System D iscou nt
+ 
+-
+$1 56,0 00
+ 
+Di sco un ted T ot al
+ 
+$8 84 ,00 0
+ 
+Ad ju st mentf or  R&D 
+Project  (70%  of t otal)
+ 
+-
+$2 65,2 00
+ 
+Reco mmen d ed  R&D Pr oj ect  Bud get
+ 
+$6 20 ,00 0
+ 
+Detail ed  Rati on al e:
+ 
+-
+ 
+Bud get cove rs all d evelop men t , int egrat ion , t est in g,an d  comp lian ce for  a 
+u n if ied AI situ at ion al aware n essp latf or m. 
+-
+ 
+In clud es dat a colle ct ion , 
+an not at ion , mod el t rain in g, 
+AP I d evelop ment , d ash boa rd s, an d D oD
+-
+sp ecif ic req u ireme nt s. 
+-
+ 
+Sup p ort sad van ced 
+cu st om izat ion  an d u ser train in g f or op er at ion al per son nel.
+ 
+ 
+10.  CON CLUSION
+ 
+Th e 
+AI
+-
+Based Sit u ati on al A w ar en ess Syst em
+ 
+of fers a p ow erf u l, secur e, and
+ 
+h igh lymo du lar 
+p latf or mf or mod er n d efen se op er at ion s. Throu gh  re al
+-
+t ime in t elligen cefu sion , aut om at ed 
+ale rt s, an d ad van ced an alyt ics, t he syst em p rovides t heD oD w it h crit ical cap ab ilit iesf or 
+en h an ced sit u at ion al aware n ess an d mission su ccess. It  b rid g
+est he tact ical ed ge w it h st rat egic 
+com man d inf rast ru ct ure , en surin g act ionab le in sigh t s are availab lew hen ever and w h erever  
+re q u ired .
+ 
+
+ 
+ 
+ 
+ 
+Logistics ManagementSy stem Wh ite Paper
+ 
+Pr ep ar ed  Fo r:
+ 
+Un it ed  Stat es Arm y, Head q u art er s, Dep art men t of  th eArm y (HQDA)
+ 
+D AM I
+-
+CD In it iat ive D iv
+ 
+Un it ed  Stat es Arm y, Pro gram Executive Off icef or In t elligen ce, Elect ron icWarf are and  Sen sor s 
+(PEO IEW&S), 
+Pr ogr amM an ager Biom et rics
+ 
+Logist i cs Man agemen t Syst em (LMS )
+ 
+Pr op osa l & Wh it e Pap er
+ 
+DO O TA  I NDUST RIA L A MERIC A  LLC
+ 
+16 333 S Grea t Oaks D r Ste 124
+ 
+Rou n d Rock, Te xas 786 81
+ 
+w ww .d oot au s.com
+ 
+UEI # : ZS RXAAN 4K HS3
+ 
+TIN  #: 80
+-
+0953 472
+ 
+CAGE COD E:  0X QS0
+ 
+BUSIN ESS  SIZE : SM A
+LL
+ 
+Sub mi tt ed T o:
+ 
+Rau l Rizzo
+ 
+760
+-
+851
+-
+6019
+ 
+rau l.rizz o.ctr @mail.smil.mil
+ 
+Sub mi tt ed By:
+ 
+Al Rhe e, D irect or of Bu sin ess Arch it ect
+ 
+737
+-
+292
+-
+8091
+ 
+crh ee @d oot au s.com
+ 
+Th isp ro posa l in clu d es inf or mat ion th at sh all n ot b ed isclose d outsid e th e 
+Gover n men t and  sh all not b
+ed up licat ed ,u sed , or d isclosed  in wh ole or in p art  for  an y 
+p u rp ose oth er t h an t oevalu at e th isp ro posa l or qu ot at ion . If ,h ow ever , a con t ract  is 
+aw arded  as a resu lt  of  or in  con n ect ion w it h th e su b mission  of t h is in for mat ion , th e 
+Gover n men t sh allh aveth
+e righ t t o du p licate,u se, or d isclose t h e d at at oth e ext ent  
+› „} À]ˆ ˚ˆ ]vı Z ˚ „˚ ’µoı ]v}v ı „ı X ]’ „˚ ’ı „]ıˆ }˚v ]ı ıZ ˚v 
+righ t t o u se inf or mat ioncon t ain ed in t his p rop osal or q u ot at ion if it is ob tain ed f rom  
+an oth er sou rce w it h ou
+t rest rict ion . Th e in for mat ion  sub je ct to th is rest riction  is 
+}v ı ]v ˚ˆ ˚˚ıÁ ]ıZ ıZ( }oo}Á ]v ˆ ]’o}’µ „ o˚P˚v ˆ W } ˆ ]’o}’µ „˚ }( 
+in f or mat ion  con t ain ed on  th is shee t is su b je ct tot h e re st rict ion  on t h e t it le p age of 
+ı Z› „}› }’ oX_
+ 
+SEV A Inn ova
+t ion s Logo
+ 
+
+ 
+ 
+ 
+ 
+SEV A Innov at ions Logo
+ 
+© 20 25 SEV A In novat ions LLC. A ll right s re served . Th isd ocu ment  isp rop riet ary an d  
+con f ident ial. Nop art of th is mater ialmay b e cop ied , rep rod u ced , rep ub lish ed , up loa ded , 
+p ost ed ,t ran smit ted , or dist ribu t ed  in  an y f ormw i
+t h ou t p riorw ritt en p ermission  fro m SEV A 
+In n ovat ion s LLC. A ll t radema rks, se rvice mar ks, an d t raden ame s ref ere n ced h er ein  are th e 
+p ro per t yof t heir  resp ective own er s.
+ 
+1.  EXECUTI V E S UM MARY
+ 
+Th e Logist ics Man agemen t  Syst em (LMS) is a scalab le sof tw are p lat fo
+rmdesign ed t o op t imiz e 
+su p p ly ch ain visib ilit y, inven t or y con tro l,t ran sp ort at ion man agement , and  w are hou se 
+op er at ion s.D evelop ed for  ind u st rial an d com mercial en viron men t s, LM Sin t egrat esre al
+-
+t ime 
+d at a f rom variou s logist ics p ro cessest o en su re op er at io
+n al efficien cy, redu ce cost s,an d 
+imp ro vep erf or man ce out com es.
+ 
+2.  OB JECT I V ES
+ 
+
+ 
+Pr ovid e au n if ied view of in vent or yan d asset s across mu lt ip le locat ion s.
+ 
+
+ 
+Tr ack sh ip men t s and  tran sp ort  act ivit ies in  rea lt ime.
+ 
+
+ 
+Op t imizew areh ou se operat ion s and  sp ace ut iliz ati
+on .
+ 
+
+ 
+In t egrat ed eman d p lan n in g and f or ecastin g.
+ 
+
+ 
+En ab le p red ict ive analyt ics t o mit igate sup p ly ch ain  d isru pt ion s.
+ 
+3.  TECH NI CAL REQ UIREMEN TS
+ 
+
+ 
+Clou d  an d on
+-
+p remise sdep loymen t  su pp ort
+ 
+
+ 
+In t egrat ion w it h ERP systems and  exter n al logistics p ro vider s
+ 
+
+ 
+Su p por t f or 
+RFID  an d b arcod et rackin g
+ 
+
+ 
+Se cu re  API arch it ectu re for  d at a sh arin g
+ 
+
+ 
+Ad van ced an alyt ics and  rep ort in gt oo ls
+ 
+
+ 
+Role
+-
+b ased  access con t rol (RBAC)
+ 
+
+ 
+D at a en crypt ion  (AES
+-
+256) f or st ored and  tran smit t ed d at a
+ 
+4.  SYSTE M A RCHI TEC TURE
+ 
+DataI n tegration Layer
+ 
+
+ 
+Con n ect s w it h
+ 
+ERP syst ems, t ran sp ort ation syst ems, an d w are hou se managem ent  
+sof tw are .
+ 
+
+ 
+Pr ocesses dat a f eed sf rom RFID , GPS , and b arcode syst ems.
+ 
+I nven tor y& Ass etMan agem ent
+ 
+
+ 
+Pr ovid es re al
+-
+t ime in ven tor y visib ilit y.
+ 
+
+ 
+Tr acks asset  locat ion a nd st atu s acrossf acilit ies.
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Gen
+er at es rep ort s on  in ven t ory le vels an d mo vemen t t ren d s.
+ 
+Transpor tation Man agem ent
+ 
+
+ 
+M an ages ro ut e p lan n in gan d optim iz at ion .
+ 
+
+ 
+Tr acks sh ip men t sin t ransit .
+ 
+
+ 
+Au t omat es carrie r sele ct ion  an d rat e man agem ent .
+ 
+WarehouseOp eration s
+ 
+
+ 
+Con t ro ls st or age allocat ion  an d p i
+ckin g strat egies.
+ 
+
+ 
+Su p por t s d yna mic slott ing an d sp aceoptim izat ion.
+ 
+
+ 
+Tr acks lab or p erf or man ce and t ask com p let ion .
+ 
+An alytic s &R ep orting
+ 
+
+ 
+D ash boa rd visu aliz at ion s f or su pp ly ch ain  met rics.
+ 
+
+ 
+Pr ed ict ive analyt ics for dema n d f ore cast in g.
+ 
+5.  TECH NI CAL 
+PRO POSAL OV ERV I EW
+ 
+Th ep rop osed  LM S p lat form t ran sf orms trad it ional logist ics in t o ad igit al, con n ect ed , and d at a
+-
+d riven p ro cess. Key b en ef it s in clu de:
+ 
+
+ 
+Com p lete visib ilit y acro ss t h e sup p ly chain
+ 
+
+ 
+Fast er  resp on set o su pp ly ch ain d isrup t ion s
+ 
+
+ 
+Red u ced operat ion
+al cost s th rou gh optim ized re sou rceu se
+ 
+
+ 
+En h an ced d ecision
+-
+makin g th rou gh  ad van ced  analyt ics
+ 
+6.  OPERATI ONAL  A DV ANTAGE S
+ 
+
+ 
+Real
+-
+t ime t rackin g of in ven t ory a nd  ship men t s
+ 
+
+ 
+Imp ro ved w areh ou seefficien cy
+ 
+
+ 
+Low er t ran sp ort at ion cost s th rou gh optim iz at ion
+ 
+
+ 
+En h an ced d ata 
+secur it y an d  regu lat or y comp lian ce
+ 
+
+ 
+Scalab le arch it ect u re for f u tu re growth
+ 
+7.  DEV ELOP MEN T TI MEL I NE
+ 
+St age
+ 
+Ta sk
+ 
+D u rat ion
+ 
+1
+ 
+Req u irement s Analysis & S yst emD esign
+ 
+4 w eeks
+ 
+2
+ 
+Cor e M od u leD evelop men t  (In ven tor y, TM S)
+ 
+8 w eeks
+ 
+3
+ 
+In t egrat ion w it h ERP an d 
+ext ern al syst ems
+ 
+6 w eeks
+ 
+4
+ 
+An alyt ics & Rep or tin g Imp lem en t at ion
+ 
+5 w eeks
+ 
+5
+ 
+UI/ UX D evelop men t & Test in g
+ 
+4 w eeks
+ 
+
+ 
+ 
+ 
+ 
+St age
+ 
+Ta sk
+ 
+D u rat ion
+ 
+6
+ 
+Syst em V alid at ion & Se cu rit y Hard en in g
+ 
+5 w eeks
+ 
+7
+ 
+D ocu men t at ion  & Train in g Pr ep arat ion
+ 
+2 w eeks
+ 
+T ot al 
+Du r ati o
+n
+ 
+ 
+34  w eeks (~8 
+mon th s)
+ 
+8.  
+ROM C OST ESTI MAT E
+ 
+Cost  Cat egory
+ 
+Amo u nt  (USD )
+ 
+Cor e M od u leD evelop men t
+ 
+$2 50 ,00 0
+ 
+ERP and  Syst em Int egrat ion
+ 
+$1 50 ,00 0
+ 
+An alyt ics & Rep or tin g
+ 
+$1 00 ,00 0
+ 
+UI/ UX D esign and D evelop ment
+ 
+$5 0,000
+ 
+Cybe rsecu rit y Comp lian ce
+ 
+$3 0,000
+ 
+D ocu men t at ion  & Train in g
+ 
+$2 0,000
+ 
+Ye ar
+-
+1 Opt ion al Sup por t
+ 
+$2 0,000
+ 
+Es ti mated T ot al
+ 
+$6 20 ,00 0
+ 
+9.  CONCL USI ON
+ 
+Th e Logist ics Man agemen t  Syst em (LMS) p ro vid es a com p reh en sive, modern  solu t ion t o 
+man age comp lex logist ics op er at ion s in  com mer cial and  ind u st rial con texts. Wit h ro bu st 
+in t e
+grat ion  cap ab ilit ies an d  ad van ced  an alyt ics, LM S en su re s or ganiz at ions are  eq u ip p ed t o 
+st re amlin e sup p ly ch ainop er at ion s and  red u ce overall cost s.
+ 
+
+
+DMS – Device Management System White Paper
+Prepared For:
+United States Army, Headquarters, Department of the Army (HQDA)
+DAMI-CD Initiative Div
+United States Army, Program Executive Office for Intelligence, Electronic Warfare and Sensors (PEO IEW&S), Program Manager Biometrics
+DMS – Device Management System
+Proposal & White Paper
+DOOTA INDUSTRIAL AMERICA LLC
+16333 S Great Oaks Dr Ste 124
+Round Rock, Texas 78681
+www.dootaus.com
+UEI #: ZSRXAAN4KHS3
+TIN #: 80-0953472
+CAGE CODE: 0XQS0
+BUSINESS SIZE: SMALL
+Submitted To:
+Raul Rizzo
+760-851-6019
+raul.rizzo.ctr@mail.smil.mil
+Submitted By:
+Al Rhee, Director of Business Architect
+737-292-8091
+crhee@dootaus.com
+This proposal includes information that shall not be disclosed outside the Government and shall not be duplicated, used, or disclosed in whole or in part for any purpose other than to evaluate this proposal or quotation. If, however, a contract is awarded as a result of or in connection with the submission of this information, the Government shall have the right to duplicate, use, or disclose the data to the extent provided in the resulting contract. This restriction does not limit the Government’s right to use information contained in this proposal or quotation if it is obtained from another source without restriction. The information subject to this restriction is contained on sheets with the following disclosure legend: “Use or disclosure of information contained on this sheet is subject to the restriction on the title page of this proposal.”
+SEVA Innovations Logo
+© 2025 SEVA Innovations LLC. All rights reserved. This document is proprietary and confidential. No part of this material may be copied, reproduced, republished, uploaded, posted, transmitted, or distributed in any form without prior written permission from SEVA Innovations LLC. All trademarks, service marks, and trade names referenced herein are the property of their respective owners.
+1. EXECUTIVE SUMMARY
+The Device Management System (DMS) is a scalable platform for managing devices, monitoring telemetry, and automating documentation processes. Originally designed for industrial applications, it ensures operational efficiency, traceability, and simplified network configuration, making it suitable for defense and commercial uses.
+2. OBJECTIVES
+Provide centralized device monitoring and management.
+Integrate real-time telemetry data for proactive insights.
+Enable mobile-based logging through QR/barcode scanning.
+Automate Port/IP assignments for rapid network setup.
+Manage user-generated and automated documentation.
+3. TECHNICAL REQUIREMENTS
+Cloud-ready architecture
+Mobile support for iOS and Android
+Offline operation with data sync
+Real-time data ingestion from telemetry devices
+AES-256 encryption for data protection
+Web-based dashboards and reporting
+4. SYSTEM ARCHITECTURE
+Data Collection Layer
+Ingests telemetry data from devices.
+Normalizes diverse input types for analysis.
+Management & Analytics Layer
+Central dashboards for monitoring.
+Provides statistical reports and alerts.
+Mobile Operations Layer
+Mobile app for work orders and logging.
+QR/barcode scanning support.
+Network Configuration Layer
+Automates Port/IP assignments.
+Simplifies large-scale deployments.
+Documentation Layer
+Supports both user uploads and auto-generated documents.
+Centralized storage and search.
+5. TECHNICAL PROPOSAL OVERVIEW
+DMS offers a unified platform to manage diverse operational environments with:
+Real-time visibility into devices and operations
+Paperless workflows improving reliability
+Scalability for large deployments
+Efficient documentation and audit trails
+6. OPERATIONAL ADVANTAGES
+Mobility and flexible field operations
+Traceability for compliance and audits
+Reduced workload for staff through automation
+Improved operational readiness
+7. DEVELOPMENT TIMELINE
+8. ROM COST ESTIMATE
+9. CONCLUSION
+The Device Management System (DMS) brings digital efficiency to device monitoring and management, offering scalability, security, and integrated tools to support operational excellence in both industrial and defense environments.

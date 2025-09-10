@@ -1,0 +1,13 @@
+{
+  "name": "seva-innovations-website",
+  "version": "1.0.0",
+  "description": "SEVA Innovations company website",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "start": "echo 'Static site - no start needed'"
+  },
+  "keywords": ["seva", "innovations", "website", "static"],
+  "author": "SEVA Innovations",
+  "license": "MIT"
+}

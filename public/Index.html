@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>SEVA Innovations - Empowering Organizations Through Service Engineering & Value Acceleration</title>
+  <meta name="description" content="SEVA Innovations specializes in intelligent, resilient systems for government, defense, and industrial sectors through service engineering and value acceleration." />
+  
+  <link rel="icon" type="image/x-icon" href="https://cdn.prod.website-files.com/685327beac84014ed8904272/685421e284ec98b0bef1c627_logo_1.png">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link href="styles.css" rel="stylesheet" />
+  <!-- Google Maps API - Replace YOUR_API_KEY with your actual API key -->
+  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script> -->
+  <style>
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .hero-service {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+    }
+    
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    .leadership-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .leadership-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    .industry-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .industry-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    /* Google Maps Styles */
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .map-container {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body class="font-inter">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="Index.html">
+        <img src="https://cdn.prod.website-files.com/685327beac84014ed8904272/685421e284ec98b0bef1c627_logo_1.png" 
+             alt="SEVA Innovations Logo" width="150" height="100"/>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="Index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="tactilink.html">TactiLink</a></li>
+          <li class="nav-item"><a class="nav-link" href="lms.html">LMS</a></li>
+          <li class="nav-item"><a class="nav-link" href="ai-situational-awareness.html">AI Awareness</a></li>
+          <li class="nav-item"><a class="nav-link" href="dms.html">DMS</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-service text-white">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h1 class="display-4 fw-bold mb-4">Empowering Organizations Through Service Engineering & Value Acceleration</h1>
+          <p class="lead mb-4">SEVA Innovations is a team of engineers, architects, and innovators specializing in intelligent, resilient systems for government, defense, and industrial sectors.</p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="#about" class="btn btn-light btn-custom me-2">Learn More</a>
+            <a href="#contact" class="btn btn-outline-light btn-custom">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- Products Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="section-title">Our Technology Solutions</h2>
+          <p class="lead mb-5">Advanced platforms designed for mission-critical operations and industrial excellence</p>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="product-card">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <img src="https://images.unsplash.com/photo-1620058623533-1f9a64e9baad?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                     alt="Voice Intelligence" class="img-fluid rounded" style="height: 150px; object-fit: cover;">
+              </div>
+              <div class="col-md-8">
+                <h4>TactiLink Voice Intelligence Platform</h4>
+                <p>Advanced tactical voice intelligence platform enabling real-time communication analysis and voice-data integration for mission-critical operations.</p>
+                <a href="tactilink.html" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="product-card">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <img src="https://images.unsplash.com/photo-1644079446600-219068676743?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                     alt="Logistics Management" class="img-fluid rounded" style="height: 150px; object-fit: cover;">
+              </div>
+              <div class="col-md-8">
+                <h4>Logistics Management System (LMS)</h4>
+                <p>Comprehensive logistics management solution optimizing supply chain visibility, inventory control, and warehouse operations.</p>
+                <a href="lms.html" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="product-card">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <img src="https://images.unsplash.com/photo-1715869428589-366729e7fdcd?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                     alt="AI Situational Awareness" class="img-fluid rounded" style="height: 150px; object-fit: cover;">
+              </div>
+              <div class="col-md-8">
+                <h4>AI Situational Awareness System</h4>
+                <p>Unified AI platform integrating facial recognition, object detection, speech recognition, and multi-modal data fusion for enhanced situational awareness.</p>
+                <a href="ai-situational-awareness.html" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="product-card">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="Device Management" class="img-fluid rounded" style="height: 150px; object-fit: cover;">
+              </div>
+              <div class="col-md-8">
+                <h4>Device Management System (DMS)</h4>
+                <p>Scalable platform for device monitoring, telemetry integration, and automated documentation processes for operational excellence.</p>
+                <a href="dms.html" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Industries Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="section-title">Industries We Serve</h2>
+          <p class="lead mb-5">Delivering purpose-built solutions for critical sectors</p>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="industry-card text-center">
+            <div class="industry-icon mb-3">
+              <i class="fas fa-shield-alt fa-3x text-primary"></i>
+            </div>
+            <h5>Defense & Military</h5>
+            <p>Mission-critical systems for tactical and strategic operations</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="industry-card text-center">
+            <div class="industry-icon mb-3">
+              <i class="fas fa-exclamation-triangle fa-3x text-primary"></i>
+            </div>
+            <h5>Public Safety & Emergency Services</h5>
+            <p>Resilient communication and response systems</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="industry-card text-center">
+            <div class="industry-icon mb-3">
+              <i class="fas fa-bolt fa-3x text-primary"></i>
+            </div>
+            <h5>Energy & Utilities</h5>
+            <p>Smart infrastructure and automation solutions</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="industry-card text-center">
+            <div class="industry-icon mb-3">
+              <i class="fas fa-cogs fa-3x text-primary"></i>
+            </div>
+            <h5>Industrial Automation</h5>
+            <p>Intelligent systems for manufacturing and logistics</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="section-title">Contact Us</h2>
+          <p class="lead mb-5">Ready to transform your operations? Let's discuss how SEVA Innovations can help.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="contact-info text-center mb-5">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="contact-item">
+                  <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                  <h5>Email</h5>
+                  <p>connect@seva-innovations.com</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="contact-item">
+                  <i class="fas fa-phone fa-2x text-primary mb-3"></i>
+                  <h5>Phone</h5>
+                  <p>737-292-8071</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="contact-item">
+                  <i class="fas fa-map-marker-alt fa-2x text-primary mb-3"></i>
+                  <h5>Address</h5>
+                  <p>16333 Great Oaks Dr. STE 100<br>Round Rock, TX 78681</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="contact-item">
+                  <i class="fas fa-globe fa-2x text-primary mb-3"></i>
+                  <h5>Website</h5>
+                  <p>www.seva-innovations.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Google Maps -->
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3437.9259518865!2d-97.7365408!3d30.494846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644d3e0f6542311%3A0xfa4d7f62b62e37f1!2sDoota%20Industrial%20America%20LLC!5e0!3m2!1sen!2sus!4v1756996271926!5m2!1sen!2sus"
+              width="100%" 
+              height="400" 
+              style="border:0; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <form id="contactForm" class="contact-form">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6">
+                <input type="email" class="form-control" placeholder="Your Email" required>
+              </div>
+              <div class="col-12">
+                <input type="text" class="form-control" placeholder="Subject" required>
+              </div>
+              <div class="col-12">
+                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+              </div>
+              <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-auto">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h6>SEVA Innovations</h6>
+          <p class="small">Empowering Organizations Through Service Engineering & Value Acceleration</p>
+        </div>
+        <div class="col-md-4">
+          <h6>Contact</h6>
+          <p class="small">connect@seva-innovations.com<br>737-292-8071</p>
+        </div>
+        <div class="col-md-4">
+          <h6>Follow Us</h6>
+          <div class="d-flex justify-content-center gap-3">
+            <a href="#" class="text-white"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-3">
+      <small>&copy; 2025 SEVA Innovations. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="formsubmit.js"></script>
+  
+  <!-- Google Maps JavaScript - Uncomment when you have an API key -->
+  <!--
+  <script>
+    function initMap() {
+      // SEVA Innovations location
+      const sevaLocation = { lat: 30.5083, lng: -97.6789 }; // Round Rock, TX coordinates
+      
+      // Create the map
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: sevaLocation,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [
+          {
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [{ visibility: "off" }]
+          }
+        ]
+      });
+      
+      // Create the marker
+      const marker = new google.maps.Marker({
+        position: sevaLocation,
+        map: map,
+        title: "SEVA Innovations",
+        icon: {
+          url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        }
+      });
+      
+      // Create the info window
+      const infoWindow = new google.maps.InfoWindow({
+        content: `
+          <div style="padding: 10px;">
+            <h6 style="margin: 0 0 5px 0; color: #007bff; font-weight: bold;">SEVA Innovations</h6>
+            <p style="margin: 0; font-size: 14px;">16333 Great Oaks Dr<br>Round Rock, TX 78681</p>
+            <p style="margin: 5px 0 0 0; font-size: 12px; color: #666;">Phone: 737-292-8071</p>
+          </div>
+        `
+      });
+      
+      // Add click event to marker
+      marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+      });
+      
+      // Open info window by default
+      infoWindow.open(map, marker);
+    }
+  </script>
+  -->
+</body>
+</html> 

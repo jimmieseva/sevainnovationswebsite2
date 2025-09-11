@@ -23,6 +23,46 @@
       font-family: 'Inter', sans-serif;
     }
     
+    /* Universal Animation System */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .animate-on-scroll {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    /* Universal Card Animations */
+    .card-animate {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(0);
+    }
+    
+    .card-animate:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    }
+    
     .hero-service {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 70vh;

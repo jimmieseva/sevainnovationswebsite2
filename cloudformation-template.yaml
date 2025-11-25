@@ -116,8 +116,10 @@ Resources:
         IPV6Enabled: true
 
   # CloudFront OAC Policy for S3
+  # Note: Using DependsOn to ensure CloudFront distribution exists first
   CloudFrontOACPolicy:
     Type: AWS::S3::BucketPolicy
+    DependsOn: CloudFrontDistribution
     Properties:
       Bucket: !Ref WebsiteBucket
       PolicyDocument:
@@ -130,7 +132,7 @@ Resources:
             Resource: !Sub '${WebsiteBucket}/*'
             Condition:
               StringEquals:
-                'AWS:SourceArn': !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution}'
+                'AWS:SourceArn': !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution.Id}'
 
 Outputs:
   WebsiteURL:

@@ -129,7 +129,7 @@ Resources:
             Principal:
               Service: cloudfront.amazonaws.com
             Action: 's3:GetObject'
-            Resource: !Sub '${WebsiteBucket}/*'
+            Resource: !Sub 'arn:aws:s3:::${WebsiteBucket}/*'
             Condition:
               StringEquals:
                 'AWS:SourceArn': !Sub 

@@ -1,0 +1,173 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'SEVA Innovations Website - S3 Static Website Hosting with CloudFront CDN'
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: Name for the S3 bucket (must be globally unique)
+    Default: seva-innovations-website
+  DomainName:
+    Type: String
+    Description: Custom domain name (e.g., www.seva-innovations.com)
+    Default: www.seva-innovations.com
+  CertificateArn:
+    Type: String
+    Description: ARN of ACM certificate for custom domain (required if DomainName is provided). Certificate must be in us-east-1 region.
+    Default: ''
+  PriceClass:
+    Type: String
+    Description: CloudFront price class
+    Default: PriceClass_100
+    AllowedValues:
+      - PriceClass_100
+      - PriceClass_200
+      - PriceClass_All
+
+Conditions:
+  HasCustomDomain: !And
+    - !Not [!Equals [!Ref DomainName, '']]
+    - !Not [!Equals [!Ref CertificateArn, '']]
+
+Resources:
+  # S3 Bucket for website hosting
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub '${BucketName}-${AWS::AccountId}'
+      WebsiteConfiguration:
+        IndexDocument: Index.html
+        ErrorDocument: Index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      VersioningConfiguration:
+        Status: Enabled
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - HEAD
+            AllowedOrigins:
+              - '*'
+            MaxAge: 3600
+
+  # Origin Access Control (OAC) for CloudFront
+  CloudFrontOAC:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Sub '${BucketName}-OAC'
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+  # CloudFront Distribution
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Origins:
+          - DomainName: !GetAtt WebsiteBucket.RegionalDomainName
+            Id: S3Origin
+            OriginAccessControlId: !GetAtt CloudFrontOAC.Id
+        Enabled: true
+        DefaultRootObject: Index.html
+        Comment: !Sub 'CloudFront distribution for ${BucketName}'
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - DELETE
+            - GET
+            - HEAD
+            - OPTIONS
+            - PATCH
+            - POST
+            - PUT
+          TargetOriginId: S3Origin
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+          ViewerProtocolPolicy: redirect-to-https
+          MinTTL: 0
+          DefaultTTL: 86400
+          MaxTTL: 31536000
+          Compress: true
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: /Index.html
+          - ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: /Index.html
+        PriceClass: !Ref PriceClass
+        Aliases: !If
+          - HasCustomDomain
+          - - !Ref DomainName
+          - !Ref AWS::NoValue
+        ViewerCertificate: !If
+          - HasCustomDomain
+          - AcmCertificateArn: !Ref CertificateArn
+            SslSupportMethod: sni-only
+            MinimumProtocolVersion: TLSv1.2_2021
+          - CloudFrontDefaultCertificate: true
+        HttpVersion: http2and3
+        IPV6Enabled: true
+
+  # CloudFront OAC Policy for S3
+  CloudFrontOACPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Statement:
+          - Sid: AllowCloudFrontServicePrincipal
+            Effect: Allow
+            Principal:
+              Service: cloudfront.amazonaws.com
+            Action: 's3:GetObject'
+            Resource: !Sub '${WebsiteBucket}/*'
+            Condition:
+              StringEquals:
+                'AWS:SourceArn': !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution}'
+
+Outputs:
+  WebsiteURL:
+    Description: CloudFront Distribution URL
+    Value: !GetAtt CloudFrontDistribution.DomainName
+    Export:
+      Name: !Sub '${AWS::StackName}-WebsiteURL'
+  
+  S3BucketName:
+    Description: S3 Bucket Name
+    Value: !Ref WebsiteBucket
+    Export:
+      Name: !Sub '${AWS::StackName}-S3BucketName'
+  
+  CloudFrontDistributionId:
+    Description: CloudFront Distribution ID
+    Value: !Ref CloudFrontDistribution
+    Export:
+      Name: !Sub '${AWS::StackName}-CloudFrontDistributionId'
+  
+  CloudFrontDomainName:
+    Description: CloudFront Domain Name
+    Value: !GetAtt CloudFrontDistribution.DomainName
+    Export:
+      Name: !Sub '${AWS::StackName}-CloudFrontDomainName'
+  
+  CustomDomainName:
+    Condition: HasCustomDomain
+    Description: Custom Domain Name
+    Value: !Ref DomainName
+    Export:
+      Name: !Sub '${AWS::StackName}-CustomDomainName'
+  
+  Route53RecordInstructions:
+    Condition: HasCustomDomain
+    Description: Route 53 DNS Configuration Instructions
+    Value: !Sub 'Create a CNAME record in Route 53: ${DomainName} -> ${CloudFrontDistribution.DomainName}'
+

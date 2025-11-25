@@ -6,7 +6,11 @@
   "scripts": {
     "build": "echo 'Static site - no build needed'",
     "start": "echo 'Static site - no start needed'",
-    "vercel-build": "echo 'Static site - no build needed'"
+    "vercel-build": "echo 'Static site - no build needed'",
+    "deploy:aws": "powershell -ExecutionPolicy Bypass -File ./deploy-aws.ps1",
+    "deploy:aws:linux": "bash deploy-aws.sh",
+    "deploy:aws:upload-only": "powershell -ExecutionPolicy Bypass -File ./deploy-aws.ps1 -SkipCloudFormation",
+    "deploy:aws:infra-only": "powershell -ExecutionPolicy Bypass -File ./deploy-aws.ps1 -SkipUpload"
   },
   "keywords": ["seva", "innovations", "website", "static"],
   "author": "SEVA Innovations",

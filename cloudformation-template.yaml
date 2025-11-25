@@ -132,7 +132,10 @@ Resources:
             Resource: !Sub '${WebsiteBucket}/*'
             Condition:
               StringEquals:
-                'AWS:SourceArn': !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution.Id}'
+                'AWS:SourceArn': !Sub 
+                  - 'arn:aws:cloudfront::${AccountId}:distribution/${DistributionId}'
+                  - AccountId: !Ref 'AWS::AccountId'
+                    DistributionId: !Ref CloudFrontDistribution
 
 Outputs:
   WebsiteURL:

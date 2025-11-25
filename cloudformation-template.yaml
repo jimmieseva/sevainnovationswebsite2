@@ -55,15 +55,12 @@ Resources:
               - '*'
             MaxAge: 3600
 
-  # Origin Access Control (OAC) for CloudFront
-  CloudFrontOAC:
-    Type: AWS::CloudFront::OriginAccessControl
+  # Origin Access Identity (OAI) for CloudFront
+  CloudFrontOAI:
+    Type: AWS::CloudFront::OriginAccessIdentity
     Properties:
-      OriginAccessControlConfig:
-        Name: !Sub '${BucketName}-OAC'
-        OriginAccessControlOriginType: s3
-        SigningBehavior: always
-        SigningProtocol: sigv4
+      OriginAccessIdentityConfig:
+        Comment: !Sub 'OAI for ${BucketName}'
 
   # CloudFront Distribution
   CloudFrontDistribution:
@@ -73,7 +70,8 @@ Resources:
         Origins:
           - DomainName: !GetAtt WebsiteBucket.RegionalDomainName
             Id: S3Origin
-            OriginAccessControlId: !GetAtt CloudFrontOAC.Id
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CloudFrontOAI}'
         Enabled: true
         DefaultRootObject: Index.html
         Comment: !Sub 'CloudFront distribution for ${BucketName}'
@@ -117,22 +115,19 @@ Resources:
         HttpVersion: http2and3
         IPV6Enabled: true
 
-  # CloudFront OAC Policy for S3
-  CloudFrontOACPolicy:
+  # CloudFront OAI Policy for S3
+  CloudFrontOAIPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
       Bucket: !Ref WebsiteBucket
       PolicyDocument:
         Statement:
-          - Sid: AllowCloudFrontServicePrincipal
+          - Sid: AllowCloudFrontOAI
             Effect: Allow
             Principal:
-              Service: cloudfront.amazonaws.com
+              AWS: !Sub 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${CloudFrontOAI}'
             Action: 's3:GetObject'
             Resource: !Sub '${WebsiteBucket}/*'
-            Condition:
-              StringEquals:
-                'AWS:SourceArn': !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution}'
 
 Outputs:
   WebsiteURL:

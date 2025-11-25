@@ -71,8 +71,7 @@ Resources:
           - DomainName: !GetAtt WebsiteBucket.RegionalDomainName
             Id: S3Origin
             OriginAccessControlId: !GetAtt CloudFrontOAC.Id
-            S3OriginConfig:
-              OriginAccessIdentity: ""
+            S3OriginConfig: {}
         Enabled: true
         DefaultRootObject: Index.html
         Comment: !Sub 'CloudFront distribution for ${BucketName}'

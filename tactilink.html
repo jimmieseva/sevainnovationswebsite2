@@ -7,7 +7,7 @@
   <title>TactiLink Voice Intelligence Platform - SEVA Innovations</title>
   <meta name="description" content="Advanced tactical voice intelligence platform enabling real-time communication analysis and voice-data integration for mission-critical operations." />
   
-  <link rel="icon" type="image/x-icon" href="ImageDump/image36.png"
+  <link rel="icon" type="image/x-icon" href="ImageDump/image36.png" />
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />  
   <!-- Google Fonts -->
@@ -145,6 +145,128 @@
     .voice-stats .text-primary {
       color: #ffc107 !important;
     }
+    
+    /* Shopping Cart Styles */
+    .cart-sidebar {
+      width: 400px;
+      max-width: 90vw;
+    }
+    
+    .cart-item-image {
+      flex-shrink: 0;
+    }
+    
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .quantity-controls .btn {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .quantity-display {
+      min-width: 30px;
+      text-align: center;
+      font-weight: 600;
+    }
+    
+    .product-card {
+      transition: transform 0.2s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .add-to-cart-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .add-to-cart-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .add-to-cart-btn:active::after {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .cart-summary {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    
+    .cart-item {
+      animation: slideInRight 0.3s ease-out;
+    }
+    
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .product-quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    
+    .product-quantity-selector input {
+      width: 80px;
+      text-align: center;
+      font-weight: 600;
+    }
+    
+    .product-quantity-selector .btn {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Cart Notification Animation */
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    #add-to-cart-notification,
+    #add-to-cart-notification-cables {
+      animation: slideInRight 0.3s ease-out;
+    }
   </style>
 </head>
 <body class="font-inter">
@@ -160,7 +282,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link" href="Index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link active" href="tactilink.html">TactiLink</a></li>
@@ -168,6 +290,23 @@
           <li class="nav-item"><a class="nav-link" href="ai-situational-awareness.html">AI Awareness</a></li>
           <li class="nav-item"><a class="nav-link" href="dms.html">DMS</a></li>
           <li class="nav-item"><a class="nav-link" href="Index.html#contact">Contact</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown">
+              <i class="fas fa-user me-1"></i>Account
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="customer-login.html"><i class="fas fa-user-circle me-2"></i>My Account</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="admin.html"><i class="fas fa-shield-alt me-2"></i>Admin</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-primary position-relative ms-2" id="cart-button" type="button" 
+                    data-bs-toggle="offcanvas" data-bs-target="#cart-sidebar" aria-controls="cart-sidebar">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-badge" style="display: none;">0</span>
+            </button>
+          </li>
         </ul>
       </div>
     </div>
@@ -178,14 +317,93 @@
     <div class="container text-center">
       <div class="row justify-content-center">
         <div class="col-lg-8">
-          <h1 class="display-4 fw-bold mb-4">TactiLink Voice Intelligence Platform</h1>
-          <p class="lead mb-4">Advanced tactical voice intelligence platform enabling real-time communication analysis 
+          <h1 class="display-4 fw-bold mb-4" data-content="heroTitle">TactiLink Voice Intelligence Platform</h1>
+          <p class="lead mb-4" data-content="heroSubtitle">Advanced tactical voice intelligence platform enabling real-time communication analysis 
              and voice-data integration for mission-critical operations.</p>
           <div class="d-flex justify-content-center gap-3 flex-wrap">
             <a href="#services" class="btn btn-light btn-custom me-2">Platform Features</a>
             <a href="#contact" class="btn btn-outline-light btn-custom">Request Demo</a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TactiLink Cables Products Section -->
+  <section id="cables" class="py-5 bg-light">
+    <div class="container">
+      
+      <h2 class="text-center mb-5" data-content="productTitle">TactiLink Cables & Accessories</h2>
+      <p class="text-center lead mb-5" data-content="productSubtitle">Professional-grade cables designed for TactiLink Voice Intelligence Platform integration</p>
+      
+      <div class="row g-4 justify-content-center">
+        
+        <!-- USB-C Cable -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm product-card">
+            <img src="ImageDump/Tactilink.jpg" class="card-img-top" alt="USB-C Cable" style="height:200px;object-fit:cover;" data-image="tactilink">
+            <div class="card-body text-center d-flex flex-column">
+              <h5 class="card-title" data-content="cableUsbcName">TactiLink Cable - USB-C</h5>
+              <p class="card-text text-muted flex-grow-1" data-content="cableUsbcDesc">Professional-grade cable with USB-C connector. 6ft length, shielded, military-grade.</p>
+              <div class="mb-3">
+                <span class="h3 text-primary fw-bold" data-price="usbc">$150.00</span>
+              </div>
+              <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+                <button class="btn btn-outline-secondary" onclick="updateQty('usbc', -1)">−</button>
+                <input type="number" id="qty-usbc" value="1" min="1" max="99" class="form-control text-center" style="width:60px;">
+                <button class="btn btn-outline-secondary" onclick="updateQty('usbc', 1)">+</button>
+              </div>
+              <button class="btn btn-primary w-100" onclick="addProduct('usbc')">
+                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- USB-A Cable -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm product-card">
+            <img src="ImageDump/Tactilink.jpg" class="card-img-top" alt="USB-A Cable" style="height:200px;object-fit:cover;" data-image="tactilink">
+            <div class="card-body text-center d-flex flex-column">
+              <h5 class="card-title" data-content="cableUsbaName">TactiLink Cable - USB-A</h5>
+              <p class="card-text text-muted flex-grow-1" data-content="cableUsbaDesc">Professional-grade cable with USB-A connector. 6ft length, shielded, military-grade.</p>
+              <div class="mb-3">
+                <span class="h3 text-primary fw-bold" data-price="usba">$150.00</span>
+              </div>
+              <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+                <button class="btn btn-outline-secondary" onclick="updateQty('usba', -1)">−</button>
+                <input type="number" id="qty-usba" value="1" min="1" max="99" class="form-control text-center" style="width:60px;">
+                <button class="btn btn-outline-secondary" onclick="updateQty('usba', 1)">+</button>
+              </div>
+              <button class="btn btn-primary w-100" onclick="addProduct('usba')">
+                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Professional Kit -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm product-card">
+            <img src="ImageDump/tablet-latitude-12-7230-black-gallery-4.avif" class="card-img-top" alt="Professional Kit" style="height:200px;object-fit:cover;" data-image="tactilinkKit">
+            <div class="card-body text-center d-flex flex-column">
+              <h5 class="card-title" data-content="kitName">TactiLink Professional Kit</h5>
+              <p class="card-text text-muted flex-grow-1" data-content="kitDesc">Complete solution: RS-232C cable, Tablet PC, adapters, and installation guide.</p>
+              <div class="mb-3">
+                <span class="h3 text-primary fw-bold" data-price="kit">$3,500.00</span>
+              </div>
+              <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+                <button class="btn btn-outline-secondary" onclick="updateQty('kit', -1)">−</button>
+                <input type="number" id="qty-kit" value="1" min="1" max="99" class="form-control text-center" style="width:60px;">
+                <button class="btn btn-outline-secondary" onclick="updateQty('kit', 1)">+</button>
+              </div>
+              <button class="btn btn-primary w-100" onclick="addProduct('kit')">
+                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
   </section>
@@ -216,7 +434,7 @@
           </div>
         </div>
         <div class="col-lg-6">
-          <img src=https://images.unsplash.com/photo-1620058623533-1f9a64e9baad?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+          <img src="https://images.unsplash.com/photo-1620058623533-1f9a64e9baad?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                alt="Voice Intelligence Technology" class="img-fluid rounded shadow" style="height: 400px; object-fit: cover;">
         </div>
       </div>
@@ -400,6 +618,7 @@
     </div>
   </section>
 
+
   <!-- Contact Section -->
   <section id="contact" class="py-5 bg-light">
     <div class="container">
@@ -432,6 +651,57 @@
     </div>
   </section>
 
+  <!-- Shopping Cart Sidebar -->
+  <div class="offcanvas offcanvas-end cart-sidebar" tabindex="-1" id="cart-sidebar" aria-labelledby="cart-sidebar-label">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title" id="cart-sidebar-label">
+        <i class="fas fa-shopping-cart me-2"></i>Shopping Cart
+        <span class="badge bg-primary ms-2" id="cart-badge-header">0</span>
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- Empty Cart Message -->
+      <div id="cart-empty" class="text-center py-5" style="display: none;">
+        <i class="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
+        <h6 class="text-muted">Your cart is empty</h6>
+        <p class="text-muted small">Add items to your cart to get started</p>
+        <button class="btn btn-primary mt-3" data-bs-dismiss="offcanvas">Continue Shopping</button>
+      </div>
+      
+      <!-- Cart Items -->
+      <div id="cart-items" class="mb-3">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
+      
+      <!-- Cart Summary -->
+      <div class="cart-summary mt-auto">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="fw-bold">Subtotal:</span>
+          <span class="h5 mb-0 text-primary" id="cart-total">$0.00</span>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-3 text-muted small">
+          <span>Shipping:</span>
+          <span>Calculated at checkout</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="fw-bold">Total:</span>
+          <span class="h4 mb-0 text-primary fw-bold" id="cart-grand-total">$0.00</span>
+        </div>
+        <button class="btn btn-primary w-100 btn-lg mb-2" id="cart-checkout-btn" onclick="Cart.checkout()" disabled>
+          <i class="fas fa-lock me-2"></i>Proceed to Checkout
+        </button>
+        <button class="btn btn-outline-secondary w-100" onclick="Cart.clear()" id="cart-clear-btn">
+          <i class="fas fa-trash me-2"></i>Clear Cart
+        </button>
+        <p class="text-muted small text-center mt-3 mb-0">
+          <i class="fas fa-shield-alt me-1"></i>Secure checkout powered by Stripe
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="bg-dark text-white text-center py-4 mt-auto">
     <div class="container">
@@ -454,40 +724,99 @@
         </div>
       </div>
       <hr class="my-3">
-      <small>&copy; 2025 SEVA Innovations. All rights reserved.</small>
+      <small>&copy; 2026 SEVA Innovations. All rights reserved.</small>
     </div>
   </footer>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Stripe.js (for real payments) -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <!-- Site Content Management -->
+  <script src="site-content.js"></script>
+  <!-- Form handling -->
   <script src="formsubmit.js"></script>
+  <!-- Shopping Cart & Checkout -->
+  <script src="shopping-cart.js"></script>
+  <script src="stripe-checkout.js"></script>
   <script>
-    let currentSlideIndex = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.slide-dot');
-
-    function showSlides() {
-      slides.forEach((slide, index) => {
-        slide.classList.remove('active');
-        dots[index].classList.remove('active');
-      });
+    // Apply editable content from admin panel
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof SiteContent !== 'undefined') {
+        // Apply tactilink page content
+        SiteContent.apply('tactilink');
+        
+        // Apply prices from content settings
+        var content = SiteContent.get('tactilink');
+        if (content) {
+          var priceEls = document.querySelectorAll('[data-price]');
+          priceEls.forEach(function(el) {
+            var key = el.getAttribute('data-price');
+            var priceKey = key === 'usbc' ? 'cableUsbcPrice' : key === 'usba' ? 'cableUsbaPrice' : 'kitPrice';
+            if (content[priceKey]) {
+              el.textContent = '$' + parseFloat(content[priceKey]).toLocaleString('en-US', {minimumFractionDigits: 2});
+            }
+          });
+        }
+        
+        // Apply images
+        var images = SiteContent.get('images');
+        if (images) {
+          document.querySelectorAll('[data-image]').forEach(function(el) {
+            var key = el.getAttribute('data-image');
+            if (images[key]) el.src = images[key];
+          });
+        }
+      }
+    });
+    
+    // Simple product functions
+    function addProduct(productId) {
+      var qtyInput = document.getElementById('qty-' + productId);
+      var qty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
+      if (typeof Cart !== 'undefined') {
+        Cart.add(productId, qty);
+      } else {
+        alert('Cart is loading, please try again.');
+      }
+    }
+    
+    function updateQty(productId, delta) {
+      var input = document.getElementById('qty-' + productId);
+      if (input) {
+        var val = parseInt(input.value) || 1;
+        val = Math.max(1, Math.min(99, val + delta));
+        input.value = val;
+      }
+    }
+    
+    // Slideshow
+    var slideIndex = 0;
+    var slides = document.querySelectorAll('.slide');
+    var dots = document.querySelectorAll('.slide-dot');
+    
+    function showSlide(n) {
+      if (slides.length === 0) return;
+      slideIndex = n;
+      if (slideIndex >= slides.length) slideIndex = 0;
+      if (slideIndex < 0) slideIndex = slides.length - 1;
       
-      slides[currentSlideIndex].classList.add('active');
-      dots[currentSlideIndex].classList.add('active');
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('active');
+        if (dots[i]) dots[i].classList.remove('active');
+      }
+      slides[slideIndex].classList.add('active');
+      if (dots[slideIndex]) dots[slideIndex].classList.add('active');
     }
-
-    function currentSlide(n) {
-      currentSlideIndex = n - 1;
-      showSlides();
+    
+    function currentSlide(n) { showSlide(n - 1); }
+    function nextSlide() { showSlide(slideIndex + 1); }
+    
+    // Auto-advance slideshow
+    if (slides.length > 0) {
+      setInterval(nextSlide, 5000);
     }
-
-    function nextSlide() {
-      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-      showSlides();
-    }
-
-    // Auto-advance slides every 5 seconds
-    setInterval(nextSlide, 5000);
+    
   </script>
 </body>
 </html> 

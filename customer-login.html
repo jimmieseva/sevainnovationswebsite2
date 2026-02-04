@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>My Account - SEVA Innovations</title>
+  
+  <link rel="icon" type="image/x-icon" href="ImageDump/image36.png">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />  
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link href="styles.css" rel="stylesheet" />
+  <style>
+    .account-container {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 40px 0;
+    }
+    .account-card {
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .order-card {
+      transition: all 0.3s;
+      border-left: 4px solid;
+    }
+    .order-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .status-badge {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+    .order-timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+    .order-timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #dee2e6;
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #dee2e6;
+      border: 2px solid white;
+    }
+    .timeline-item.active::before {
+      background: #007bff;
+    }
+    .timeline-item.completed::before {
+      background: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="Index.html">
+        <img src="ImageDump/image36.png" alt="SEVA Innovations Logo" width="200" height="100"/>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="Index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="tactilink.html">TactiLink</a></li>
+          <li class="nav-item"><a class="nav-link" href="Index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Login Form -->
+  <div id="loginSection" class="account-container">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <div class="card account-card">
+            <div class="card-body p-5">
+              <div class="text-center mb-4">
+                <i class="fas fa-user-circle fa-4x text-primary mb-3"></i>
+                <h2>Customer Login</h2>
+                <p class="text-muted">View your orders and track shipments</p>
+              </div>
+              
+              <form id="customerLoginForm">
+                <div class="mb-3">
+                  <label for="customerEmail" class="form-label">Email Address</label>
+                  <input type="email" class="form-control" id="customerEmail" placeholder="your.email@example.com" required>
+                  <small class="text-muted">Enter the email address used for your orders</small>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 btn-lg">
+                  <i class="fas fa-sign-in-alt me-2"></i>Access My Account
+                </button>
+              </form>
+              
+              <div class="mt-4 text-center">
+                <p class="text-muted small">
+                  <i class="fas fa-info-circle me-1"></i>
+                  Don't have an account? Your account is automatically created when you place an order.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Account Dashboard -->
+  <div id="accountSection" style="display: none;">
+    <div class="container py-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-user-circle me-2"></i>My Account</h2>
+        <button class="btn btn-outline-secondary" id="logoutCustomerBtn">
+          <i class="fas fa-sign-out-alt me-2"></i>Logout
+        </button>
+      </div>
+
+      <!-- Account Summary -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <i class="fas fa-shopping-cart fa-3x text-primary mb-3"></i>
+              <h3 id="totalOrdersCount">0</h3>
+              <p class="text-muted mb-0">Total Orders</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <i class="fas fa-box fa-3x text-info mb-3"></i>
+              <h3 id="pendingOrdersCount">0</h3>
+              <p class="text-muted mb-0">Pending Orders</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+              <h3 id="deliveredOrdersCount">0</h3>
+              <p class="text-muted mb-0">Delivered Orders</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Info -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="fas fa-user me-2"></i>Account Information</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <p><strong>Email:</strong> <span id="customerEmailDisplay"></span></p>
+              <p><strong>Name:</strong> <span id="customerNameDisplay"></span></p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Phone:</strong> <span id="customerPhoneDisplay">-</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders List -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="fas fa-list me-2"></i>Order History</h5>
+        </div>
+        <div class="card-body">
+          <div id="customerOrdersList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Detail Modal -->
+  <div class="modal fade" id="orderDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Order Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="orderDetailContent"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-0">&copy; 2025 SEVA Innovations. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="auth.js"></script>
+  <script src="order-management.js"></script>
+  <script src="customer-account.js"></script>
+</body>
+</html>

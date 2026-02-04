@@ -206,3 +206,4 @@ aws route53 list-resource-record-sets --hosted-zone-id YOUR_ZONE_ID
 aws cloudformation describe-stacks --stack-name seva-innovations-website --region us-east-1 --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDomainName'].OutputValue" --output text
 ```
 
+

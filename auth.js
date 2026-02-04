@@ -36,8 +36,24 @@
 
   // Initialize admin credentials
   function initAuth() {
-    if (!localStorage.getItem(ADMIN_KEY)) {
+    // Always ensure correct credentials are set
+    var stored = localStorage.getItem(ADMIN_KEY);
+    var needsReset = true;
+    
+    if (stored) {
+      try {
+        var current = JSON.parse(stored);
+        // Check if username matches expected
+        if (current.username === 'SevaAdmin393') {
+          needsReset = false;
+        }
+      } catch (e) {}
+    }
+    
+    if (needsReset) {
       localStorage.setItem(ADMIN_KEY, JSON.stringify(DEFAULT_ADMIN));
+      // Clear any old lockouts
+      localStorage.removeItem(LOCKOUT_KEY);
     }
   }
 

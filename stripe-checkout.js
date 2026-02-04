@@ -17,15 +17,15 @@
   
   var CONFIG = {
     // Mode: 'demo' (no real payments), 'test' (Stripe test mode), 'live' (real payments)
-    MODE: 'demo',
+    MODE: 'live',
     
     // Stripe Publishable Keys (get from https://dashboard.stripe.com/apikeys)
     STRIPE_KEY_TEST: 'pk_test_YOUR_TEST_KEY_HERE',
-    STRIPE_KEY_LIVE: 'pk_live_YOUR_LIVE_KEY_HERE',
+    STRIPE_KEY_LIVE: 'pk_live_51ST1I1K4v7Thx5Z1CdXMAt5MbWLp8opykyc0HCdyXIxgZRkcnGaWjRPmSn61lzYpfOtfHi4vhOzMJynynUfiSqiR007IkCCWM1',
     
     // Backend API endpoint for creating checkout sessions
     // Deploy backend from /backend folder, then put URL here
-    API_ENDPOINT: '/api/create-checkout-session',
+    API_ENDPOINT: 'https://1x3wclxec7.execute-api.us-west-1.amazonaws.com/prod/api/create-checkout-session',
     
     // Redirect URLs after payment
     SUCCESS_URL: window.location.origin + '/tactilink.html?payment=success',
@@ -190,7 +190,59 @@
       '<div class="row g-3 mb-4">' +
       '<div class="col-12"><input type="text" class="form-control" id="demo-address" placeholder="Street Address" required></div>' +
       '<div class="col-md-6"><input type="text" class="form-control" id="demo-city" placeholder="City" required></div>' +
-      '<div class="col-md-3"><input type="text" class="form-control" id="demo-state" placeholder="State" required></div>' +
+      '<div class="col-md-3"><select class="form-select" id="demo-state" required>' +
+      '<option value="" selected>Select State</option>' +
+      '<option value="AL">AL - Alabama</option>' +
+      '<option value="AK">AK - Alaska</option>' +
+      '<option value="AZ">AZ - Arizona</option>' +
+      '<option value="AR">AR - Arkansas</option>' +
+      '<option value="CA">CA - California</option>' +
+      '<option value="CO">CO - Colorado</option>' +
+      '<option value="CT">CT - Connecticut</option>' +
+      '<option value="DE">DE - Delaware</option>' +
+      '<option value="FL">FL - Florida</option>' +
+      '<option value="GA">GA - Georgia</option>' +
+      '<option value="HI">HI - Hawaii</option>' +
+      '<option value="ID">ID - Idaho</option>' +
+      '<option value="IL">IL - Illinois</option>' +
+      '<option value="IN">IN - Indiana</option>' +
+      '<option value="IA">IA - Iowa</option>' +
+      '<option value="KS">KS - Kansas</option>' +
+      '<option value="KY">KY - Kentucky</option>' +
+      '<option value="LA">LA - Louisiana</option>' +
+      '<option value="ME">ME - Maine</option>' +
+      '<option value="MD">MD - Maryland</option>' +
+      '<option value="MA">MA - Massachusetts</option>' +
+      '<option value="MI">MI - Michigan</option>' +
+      '<option value="MN">MN - Minnesota</option>' +
+      '<option value="MS">MS - Mississippi</option>' +
+      '<option value="MO">MO - Missouri</option>' +
+      '<option value="MT">MT - Montana</option>' +
+      '<option value="NE">NE - Nebraska</option>' +
+      '<option value="NV">NV - Nevada</option>' +
+      '<option value="NH">NH - New Hampshire</option>' +
+      '<option value="NJ">NJ - New Jersey</option>' +
+      '<option value="NM">NM - New Mexico</option>' +
+      '<option value="NY">NY - New York</option>' +
+      '<option value="NC">NC - North Carolina</option>' +
+      '<option value="ND">ND - North Dakota</option>' +
+      '<option value="OH">OH - Ohio</option>' +
+      '<option value="OK">OK - Oklahoma</option>' +
+      '<option value="OR">OR - Oregon</option>' +
+      '<option value="PA">PA - Pennsylvania</option>' +
+      '<option value="RI">RI - Rhode Island</option>' +
+      '<option value="SC">SC - South Carolina</option>' +
+      '<option value="SD">SD - South Dakota</option>' +
+      '<option value="TN">TN - Tennessee</option>' +
+      '<option value="TX">TX - Texas</option>' +
+      '<option value="UT">UT - Utah</option>' +
+      '<option value="VT">VT - Vermont</option>' +
+      '<option value="VA">VA - Virginia</option>' +
+      '<option value="WA">WA - Washington</option>' +
+      '<option value="WV">WV - West Virginia</option>' +
+      '<option value="WI">WI - Wisconsin</option>' +
+      '<option value="WY">WY - Wyoming</option>' +
+      '</select></div>' +
       '<div class="col-md-3"><input type="text" class="form-control" id="demo-zip" placeholder="ZIP" required></div>' +
       '</div>' +
       

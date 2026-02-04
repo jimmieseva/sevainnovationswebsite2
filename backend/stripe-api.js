@@ -60,8 +60,8 @@ exports.handler = async (event) => {
       price_data: {
         currency: 'usd',
         product_data: {
-          name: item.name,
-          description: item.description || undefined
+          name: item.name || item.productName,
+          description: item.description || item.productDescription || undefined
         },
         unit_amount: item.amount // Price in cents from admin panel
       },

@@ -41,10 +41,10 @@
       productSubtitle: 'Professional-grade cables designed for TactiLink Voice Intelligence Platform integration',
       cableUsbcName: 'TactiLink Cable - USB-C',
       cableUsbcDesc: 'Professional-grade cable with USB-C connector. 6ft length, shielded, military-grade.',
-      cableUsbcPrice: '150.00',
+      cableUsbcPrice: '300.00',
       cableUsbaName: 'TactiLink Cable - USB-A',
       cableUsbaDesc: 'Professional-grade cable with USB-A connector. 6ft length, shielded, military-grade.',
-      cableUsbaPrice: '150.00',
+      cableUsbaPrice: '300.00',
       kitName: 'TactiLink Professional Kit',
       kitDesc: 'Complete solution: RS-232C cable, Tablet PC, adapters, and installation guide.',
       kitPrice: '3500.00'

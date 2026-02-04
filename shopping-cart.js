@@ -15,14 +15,14 @@
       id: 'usbc',
       name: 'TactiLink Cable - USB-C',
       description: 'Professional-grade TactiLink cable with USB-C connector. 6ft length, shielded, military-grade connectors.',
-      price: 15000, // $150.00 in cents
+      price: 30000, // $300.00 in cents
       image: 'ImageDump/Tactilink.jpg'
     },
     'usba': {
       id: 'usba',
       name: 'TactiLink Cable - USB-A',
       description: 'Professional-grade TactiLink cable with USB-A connector. 6ft length, shielded, military-grade connectors.',
-      price: 15000, // $150.00 in cents
+      price: 30000, // $300.00 in cents
       image: 'ImageDump/Tactilink.jpg'
     },
     'kit': {

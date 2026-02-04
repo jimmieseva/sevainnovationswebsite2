@@ -75,12 +75,13 @@ exports.handler = async (event) => {
 
     // Validate each line item
     for (const item of lineItems) {
-      if (!item.productName || !item.amount || !item.quantity) {
+      const itemName = item.productName || item.name;
+      if (!itemName || !item.amount || !item.quantity) {
         return {
           statusCode: 400,
           headers,
           body: JSON.stringify({ 
-            error: 'Each line item must have productName, amount, and quantity' 
+            error: 'Each line item must have name, amount, and quantity' 
           })
         };
       }
@@ -102,10 +103,10 @@ exports.handler = async (event) => {
       price_data: {
         currency: item.currency || 'usd',
         product_data: {
-          name: item.productName,
-          description: item.productDescription || undefined,
+          name: item.productName || item.name,
+          description: item.productDescription || item.description || undefined,
           metadata: {
-            productId: item.productId || undefined,
+            productId: item.productId || item.id || undefined,
             sku: item.sku || undefined
           }
         },

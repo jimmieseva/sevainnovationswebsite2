@@ -100,26 +100,25 @@
 
     document.getElementById('loginForm').onsubmit = function(e) {
       e.preventDefault();
-      var email = document.getElementById('loginEmail').value;
+      var username = document.getElementById('loginEmail').value;
       var password = document.getElementById('loginPassword').value;
 
       if (typeof Auth !== 'undefined') {
-        var result = Auth.login(email, password, true);
+        if (Auth.isLockedOut()) {
+          showToast('Account locked. Try again in ' + Auth.getLockoutRemaining() + ' minutes.', 'danger');
+          return;
+        }
+        
+        var result = Auth.login(username, password);
         if (result.success) {
           modal.hide();
           showDashboard();
+          showToast('Welcome back!', 'success');
         } else {
-          showToast('Invalid credentials', 'danger');
+          showToast(result.error || 'Invalid credentials', 'danger');
         }
       } else {
-        // Fallback simple auth
-        if (email === 'admin@seva-innovations.com' && password === 'admin123') {
-          localStorage.setItem('admin_logged_in', 'true');
-          modal.hide();
-          showDashboard();
-        } else {
-          showToast('Invalid credentials', 'danger');
-        }
+        showToast('Authentication system not loaded', 'danger');
       }
     };
   }
@@ -174,25 +173,28 @@
     // Password form
     document.getElementById('passwordForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      var currentPass = document.getElementById('currentPassword').value;
       var newPass = document.getElementById('newPassword').value;
       var confirmPass = document.getElementById('confirmPassword').value;
 
       if (newPass !== confirmPass) {
-        showToast('Passwords do not match', 'danger');
+        showToast('New passwords do not match', 'danger');
+        return;
+      }
+      
+      if (newPass.length < 8) {
+        showToast('Password must be at least 8 characters', 'danger');
         return;
       }
 
       if (typeof Auth !== 'undefined') {
-        var result = Auth.updateAdminPassword(newPass);
+        var result = Auth.updatePassword(currentPass, newPass);
         if (result.success) {
-          showToast('Password updated', 'success');
+          showToast('Password updated successfully', 'success');
           this.reset();
         } else {
-          showToast('Error: ' + result.error, 'danger');
+          showToast(result.error || 'Error updating password', 'danger');
         }
-      } else {
-        showToast('Password updated', 'success');
-        this.reset();
       }
     });
 
@@ -486,8 +488,30 @@
     input.value = '';
   }
 
+  // Decrypt sensitive data
+  function decryptData(encoded) {
+    if (!encoded) return '';
+    try {
+      var text = atob(encoded);
+      var key = 'SEVA_ORDER_KEY_' + new Date().getFullYear();
+      var result = '';
+      for (var i = 0; i < text.length; i++) {
+        result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+      }
+      return result;
+    } catch (e) {
+      return '[Error]';
+    }
+  }
+
   // View order - detailed view with payment processing info
   function viewOrder(orderId) {
+    // Security check
+    if (!Auth.isAdmin()) {
+      showToast('Access denied', 'danger');
+      return;
+    }
+    
     var orders = getOrders();
     var order = orders.find(function(o) { return o.id === orderId; });
     if (!order) return;
@@ -552,21 +576,41 @@
       '<tfoot class="table-light"><tr><td colspan="3" class="text-end"><strong>Total:</strong></td><td class="text-end"><strong class="text-primary fs-5">' + (order.totalFormatted || '$' + ((order.total || 0) / 100).toFixed(2)) + '</strong></td></tr></tfoot>' +
       '</table>' +
       
+      // Payment Card Details (encrypted - only visible to admin)
+      (order.paymentData ? 
+        '<div class="card bg-dark text-white mt-3">' +
+        '<div class="card-header"><i class="fas fa-credit-card me-2"></i>Payment Card Details <span class="badge bg-warning text-dark ms-2">CONFIDENTIAL</span></div>' +
+        '<div class="card-body">' +
+        '<div class="row">' +
+        '<div class="col-md-6">' +
+        '<p class="mb-1"><small class="text-muted">Card Number</small><br><code class="text-warning" id="card-num-' + order.id + '">**** **** **** ' + (order.paymentData.lastFour || '****') + '</code>' +
+        '<button class="btn btn-sm btn-outline-light ms-2" onclick="Admin.revealCard(\'' + order.id + '\')"><i class="fas fa-eye"></i></button></p>' +
+        '</div>' +
+        '<div class="col-md-3">' +
+        '<p class="mb-1"><small class="text-muted">Expiry</small><br><code class="text-warning" id="card-exp-' + order.id + '">**/**</code>' +
+        '<button class="btn btn-sm btn-outline-light ms-2" onclick="Admin.revealExpiry(\'' + order.id + '\')"><i class="fas fa-eye"></i></button></p>' +
+        '</div>' +
+        '<div class="col-md-3">' +
+        '<p class="mb-1"><small class="text-muted">CVV</small><br><code class="text-warning" id="card-cvv-' + order.id + '">***</code>' +
+        '<button class="btn btn-sm btn-outline-light ms-2" onclick="Admin.revealCVV(\'' + order.id + '\')"><i class="fas fa-eye"></i></button></p>' +
+        '</div>' +
+        '</div>' +
+        '<p class="mb-0"><small class="text-muted">Cardholder</small><br><strong id="card-holder-' + order.id + '">' + decryptData(order.paymentData.cardHolderEncrypted) + '</strong></p>' +
+        '<hr class="border-secondary">' +
+        '<p class="small text-warning mb-0"><i class="fas fa-exclamation-triangle me-1"></i>Process this card through your Stripe terminal or dashboard. Delete payment data after processing.</p>' +
+        '</div></div>' : ''
+      ) +
+      
       (order.paymentStatus !== 'paid' ? 
         '<div class="alert alert-info mt-3">' +
-        '<h6><i class="fas fa-info-circle me-2"></i>Manual Payment Processing</h6>' +
-        '<p class="mb-2">To process this order via Stripe:</p>' +
-        '<ol class="mb-2">' +
-        '<li>Go to <a href="https://dashboard.stripe.com/invoices/create" target="_blank">Stripe Dashboard → Invoices</a></li>' +
-        '<li>Create invoice for <strong>' + (order.customer ? order.customer.email : 'customer') + '</strong></li>' +
-        '<li>Add items totaling <strong>' + (order.totalFormatted || '$' + ((order.total || 0) / 100).toFixed(2)) + '</strong></li>' +
-        '<li>Send invoice or payment link to customer</li>' +
-        '<li>Once paid, click "Mark Paid" below</li>' +
-        '</ol>' +
-        '<button class="btn btn-success" onclick="Admin.markPaid(\'' + order.id + '\'); bootstrap.Modal.getInstance(document.getElementById(\'orderModal\')).hide();">' +
+        '<h6><i class="fas fa-info-circle me-2"></i>Process Payment</h6>' +
+        '<p class="mb-2">Use the card details above to process payment via Stripe Dashboard or terminal.</p>' +
+        '<button class="btn btn-success me-2" onclick="Admin.markPaid(\'' + order.id + '\'); bootstrap.Modal.getInstance(document.getElementById(\'orderModal\')).hide();">' +
         '<i class="fas fa-check me-2"></i>Mark as Paid</button>' +
+        '<button class="btn btn-outline-danger" onclick="Admin.clearPaymentData(\'' + order.id + '\')">' +
+        '<i class="fas fa-trash me-2"></i>Delete Card Data</button>' +
         '</div>' : 
-        '<div class="alert alert-success mt-3"><i class="fas fa-check-circle me-2"></i>Payment received</div>'
+        '<div class="alert alert-success mt-3"><i class="fas fa-check-circle me-2"></i>Payment processed</div>'
       ) +
       
       '<div class="mt-3">' +
@@ -671,6 +715,56 @@
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  // Reveal card number
+  function revealCard(orderId) {
+    if (!Auth.isAdmin()) return;
+    var orders = getOrders();
+    var order = orders.find(function(o) { return o.id === orderId; });
+    if (order && order.paymentData) {
+      var el = document.getElementById('card-num-' + orderId);
+      if (el) el.textContent = decryptData(order.paymentData.cardEncrypted);
+    }
+  }
+  
+  // Reveal expiry
+  function revealExpiry(orderId) {
+    if (!Auth.isAdmin()) return;
+    var orders = getOrders();
+    var order = orders.find(function(o) { return o.id === orderId; });
+    if (order && order.paymentData) {
+      var el = document.getElementById('card-exp-' + orderId);
+      if (el) el.textContent = decryptData(order.paymentData.expiryEncrypted);
+    }
+  }
+  
+  // Reveal CVV
+  function revealCVV(orderId) {
+    if (!Auth.isAdmin()) return;
+    var orders = getOrders();
+    var order = orders.find(function(o) { return o.id === orderId; });
+    if (order && order.paymentData) {
+      var el = document.getElementById('card-cvv-' + orderId);
+      if (el) el.textContent = decryptData(order.paymentData.cvvEncrypted);
+    }
+  }
+  
+  // Clear payment data after processing
+  function clearPaymentData(orderId) {
+    if (!Auth.isAdmin()) return;
+    if (!confirm('Delete card data for this order? This cannot be undone.')) return;
+    
+    var orders = getOrders();
+    var order = orders.find(function(o) { return o.id === orderId; });
+    if (order) {
+      order.paymentData = null;
+      order.paymentNotes = 'Card data deleted after processing on ' + new Date().toLocaleString();
+      localStorage.setItem('seva_orders', JSON.stringify(orders));
+      showToast('Payment data deleted', 'success');
+      bootstrap.Modal.getInstance(document.getElementById('orderModal')).hide();
+      loadOrders(document.getElementById('orderFilter').value);
+    }
+  }
+
   // Expose public API
   window.Admin = {
     saveContent: saveContent,
@@ -683,7 +777,11 @@
     viewOrder: viewOrder,
     updateStatus: updateStatus,
     markPaid: markPaid,
-    deleteOrder: deleteOrder
+    deleteOrder: deleteOrder,
+    revealCard: revealCard,
+    revealExpiry: revealExpiry,
+    revealCVV: revealCVV,
+    clearPaymentData: clearPaymentData
   };
 
 })();

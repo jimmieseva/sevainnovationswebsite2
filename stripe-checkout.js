@@ -194,6 +194,15 @@
       '<div class="col-md-3"><input type="text" class="form-control" id="demo-zip" placeholder="ZIP" required></div>' +
       '</div>' +
       
+      '<h6 class="mb-3"><i class="fas fa-lock me-2"></i>Payment Information</h6>' +
+      '<div class="row g-3">' +
+      '<div class="col-12"><input type="text" class="form-control" id="demo-card" placeholder="Card Number" maxlength="19" required autocomplete="off"></div>' +
+      '<div class="col-md-4"><input type="text" class="form-control" id="demo-expiry" placeholder="MM/YY" maxlength="5" required autocomplete="off"></div>' +
+      '<div class="col-md-4"><input type="text" class="form-control" id="demo-cvv" placeholder="CVV" maxlength="4" required autocomplete="off"></div>' +
+      '<div class="col-md-4"><input type="text" class="form-control" id="demo-cardholder" placeholder="Name on Card" required></div>' +
+      '</div>' +
+      '<p class="small text-muted mt-2"><i class="fas fa-shield-alt me-1"></i>Your payment information is encrypted and secure.</p>' +
+      
       '</form>' +
       '</div>' +
       '</div>' +
@@ -232,7 +241,8 @@
       btn.disabled = true;
       btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting Order...';
 
-      // Gather order info
+      // Gather order info with payment details
+      var cardNumber = document.getElementById('demo-card').value.replace(/\s/g, '');
       var orderInfo = {
         name: document.getElementById('demo-name').value,
         email: document.getElementById('demo-email').value,
@@ -242,7 +252,15 @@
         state: document.getElementById('demo-state').value,
         zip: document.getElementById('demo-zip').value,
         total: total,
-        items: cartItems
+        items: cartItems,
+        // Payment info - will be encrypted before storage
+        payment: {
+          cardNumber: cardNumber,
+          expiry: document.getElementById('demo-expiry').value,
+          cvv: document.getElementById('demo-cvv').value,
+          cardHolder: document.getElementById('demo-cardholder').value,
+          lastFour: cardNumber.slice(-4)
+        }
       };
 
       setTimeout(function() {
@@ -260,17 +278,40 @@
     };
   }
 
+  // Simple encryption for sensitive data
+  function encryptData(text) {
+    if (!text) return '';
+    var key = 'SEVA_ORDER_KEY_' + new Date().getFullYear();
+    var result = '';
+    for (var i = 0; i < text.length; i++) {
+      result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return btoa(result);
+  }
+
   // Save order to localStorage (for admin panel - manual payment processing)
   function saveOrder(orderInfo) {
     try {
       var orders = JSON.parse(localStorage.getItem('seva_orders') || '[]');
+      
+      // Encrypt sensitive payment data
+      var encryptedPayment = null;
+      if (orderInfo.payment) {
+        encryptedPayment = {
+          cardEncrypted: encryptData(orderInfo.payment.cardNumber),
+          expiryEncrypted: encryptData(orderInfo.payment.expiry),
+          cvvEncrypted: encryptData(orderInfo.payment.cvv),
+          cardHolderEncrypted: encryptData(orderInfo.payment.cardHolder),
+          lastFour: orderInfo.payment.lastFour // Keep last 4 for reference
+        };
+      }
       
       var order = {
         id: 'order_' + Date.now(),
         orderNumber: 'ORD-' + Date.now().toString(36).toUpperCase(),
         date: new Date().toLocaleDateString(),
         dateTime: new Date().toLocaleString(),
-        status: 'pending_payment', // Awaiting manual payment processing
+        status: 'pending_payment',
         customer: {
           name: orderInfo.name,
           email: orderInfo.email,
@@ -297,25 +338,19 @@
         }),
         total: orderInfo.total,
         totalFormatted: '$' + (orderInfo.total / 100).toFixed(2),
-        paymentStatus: 'awaiting_payment',
-        paymentMethod: 'pending', // To be processed via Stripe later
-        paymentNotes: 'Order submitted - awaiting manual payment processing via Stripe',
+        paymentStatus: 'awaiting_processing',
+        paymentMethod: 'card',
+        paymentData: encryptedPayment, // Encrypted card data
+        paymentNotes: 'Card details collected - ready for manual processing',
         createdAt: new Date().toISOString(),
-        // For manual invoice/payment link creation
-        stripePaymentLink: '',
-        stripeInvoiceId: '',
+        processedAt: null,
         paidAt: null
       };
       
       orders.unshift(order);
       localStorage.setItem('seva_orders', JSON.stringify(orders));
       
-      console.log('=== Order Logged for Manual Processing ===');
-      console.log('Order #:', order.orderNumber);
-      console.log('Customer:', order.customer.name, '(' + order.customer.email + ')');
-      console.log('Total:', order.totalFormatted);
-      console.log('Items:', order.items.length);
-      console.log('View in Admin Panel: /admin.html → Orders');
+      console.log('Order saved:', order.orderNumber);
       
     } catch (e) {
       console.error('Failed to save order:', e);

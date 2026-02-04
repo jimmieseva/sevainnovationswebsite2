@@ -162,20 +162,19 @@
         <div class="modal-body p-4">
           <form id="loginForm">
             <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-control form-control-lg" id="loginEmail" required>
+              <label class="form-label">Username</label>
+              <input type="text" class="form-control form-control-lg" id="loginEmail" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label class="form-label">Password</label>
-              <input type="password" class="form-control form-control-lg" id="loginPassword" required>
-            </div>
-            <div class="alert alert-secondary small">
-              <i class="fas fa-info-circle me-1"></i>
-              Default: admin@seva-innovations.com / admin123
+              <input type="password" class="form-control form-control-lg" id="loginPassword" required autocomplete="off">
             </div>
             <button type="submit" class="btn btn-dark btn-lg w-100">
               <i class="fas fa-sign-in-alt me-2"></i>Login
             </button>
+            <p class="text-muted small text-center mt-3 mb-0">
+              <i class="fas fa-lock me-1"></i>Authorized personnel only
+            </p>
           </form>
         </div>
       </div>
@@ -447,11 +446,16 @@
               <h5 class="mb-3">Change Admin Password</h5>
               <form id="passwordForm">
                 <div class="mb-3">
-                  <label class="form-label">New Password</label>
-                  <input type="password" class="form-control" id="newPassword" required minlength="6">
+                  <label class="form-label">Current Password</label>
+                  <input type="password" class="form-control" id="currentPassword" required>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Confirm Password</label>
+                  <label class="form-label">New Password</label>
+                  <input type="password" class="form-control" id="newPassword" required minlength="8">
+                  <small class="text-muted">Minimum 8 characters</small>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Confirm New Password</label>
                   <input type="password" class="form-control" id="confirmPassword" required>
                 </div>
                 <button type="submit" class="btn btn-primary">

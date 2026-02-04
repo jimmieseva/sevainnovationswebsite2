@@ -1,145 +1,262 @@
-// Authentication System
-// Simple authentication using localStorage (for demo purposes)
-// In production, this should be replaced with proper backend authentication
+/**
+ * Authentication & Security System
+ * SEVA Innovations Admin Panel
+ */
 
-const AUTH_STORAGE_KEY = 'seva_auth';
-const ADMIN_CREDENTIALS_KEY = 'seva_admin_credentials';
+(function() {
+  'use strict';
 
-// Default admin credentials (should be changed in production)
-const DEFAULT_ADMIN_EMAIL = 'admin@seva-innovations.com';
-const DEFAULT_ADMIN_PASSWORD = 'admin123'; // Change this!
+  var AUTH_KEY = 'seva_auth_session';
+  var ADMIN_KEY = 'seva_admin_creds';
+  var LOCKOUT_KEY = 'seva_login_attempts';
+  var MAX_ATTEMPTS = 5;
+  var LOCKOUT_MINUTES = 15;
 
-// Initialize auth storage
-function initAuthStorage() {
-  // Initialize admin credentials if not set
-  if (!localStorage.getItem(ADMIN_CREDENTIALS_KEY)) {
-    localStorage.setItem(ADMIN_CREDENTIALS_KEY, JSON.stringify({
-      email: DEFAULT_ADMIN_EMAIL,
-      password: DEFAULT_ADMIN_PASSWORD,
-      // In production, password should be hashed
-      role: 'admin'
-    }));
+  // Default admin credentials (hashed)
+  // Username: SevaAdmin393
+  // Password: PurpleCrush!23
+  var DEFAULT_ADMIN = {
+    username: 'SevaAdmin393',
+    passwordHash: hashPassword('PurpleCrush!23'),
+    role: 'admin'
+  };
+
+  // Simple hash function (for client-side use only)
+  function hashPassword(password) {
+    var hash = 0;
+    var salt = 'SEVA_2024_SECURE';
+    var str = salt + password + salt;
+    for (var i = 0; i < str.length; i++) {
+      var char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return 'h_' + Math.abs(hash).toString(36) + '_' + password.length;
   }
-}
 
-// Login function
-function login(email, password, isAdmin = false) {
-  initAuthStorage();
-  
-  if (isAdmin) {
-    // Admin login
-    const adminCreds = JSON.parse(localStorage.getItem(ADMIN_CREDENTIALS_KEY));
-    if (email === adminCreds.email && password === adminCreds.password) {
-      const session = {
-        email: email,
+  // Initialize admin credentials
+  function initAuth() {
+    if (!localStorage.getItem(ADMIN_KEY)) {
+      localStorage.setItem(ADMIN_KEY, JSON.stringify(DEFAULT_ADMIN));
+    }
+  }
+
+  // Check lockout
+  function isLockedOut() {
+    try {
+      var lockout = JSON.parse(localStorage.getItem(LOCKOUT_KEY) || '{}');
+      if (lockout.lockedUntil && new Date().getTime() < lockout.lockedUntil) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Get remaining lockout time
+  function getLockoutRemaining() {
+    try {
+      var lockout = JSON.parse(localStorage.getItem(LOCKOUT_KEY) || '{}');
+      if (lockout.lockedUntil) {
+        var remaining = Math.ceil((lockout.lockedUntil - new Date().getTime()) / 60000);
+        return remaining > 0 ? remaining : 0;
+      }
+      return 0;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  // Record login attempt
+  function recordAttempt(success) {
+    try {
+      var lockout = JSON.parse(localStorage.getItem(LOCKOUT_KEY) || '{}');
+      
+      if (success) {
+        localStorage.removeItem(LOCKOUT_KEY);
+        return;
+      }
+      
+      lockout.attempts = (lockout.attempts || 0) + 1;
+      lockout.lastAttempt = new Date().getTime();
+      
+      if (lockout.attempts >= MAX_ATTEMPTS) {
+        lockout.lockedUntil = new Date().getTime() + (LOCKOUT_MINUTES * 60 * 1000);
+      }
+      
+      localStorage.setItem(LOCKOUT_KEY, JSON.stringify(lockout));
+    } catch (e) {}
+  }
+
+  // Login function
+  function login(username, password) {
+    initAuth();
+    
+    if (isLockedOut()) {
+      return { 
+        success: false, 
+        error: 'Account locked. Try again in ' + getLockoutRemaining() + ' minutes.',
+        locked: true
+      };
+    }
+
+    var admin = JSON.parse(localStorage.getItem(ADMIN_KEY));
+    var inputHash = hashPassword(password);
+
+    if (username === admin.username && inputHash === admin.passwordHash) {
+      var session = {
+        username: username,
         role: 'admin',
         loginTime: new Date().toISOString(),
+        sessionId: generateSessionId(),
         isAuthenticated: true
       };
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
+      localStorage.setItem(AUTH_KEY, JSON.stringify(session));
+      recordAttempt(true);
       return { success: true, user: session };
     } else {
-      return { success: false, error: 'Invalid admin credentials' };
+      recordAttempt(false);
+      var lockout = JSON.parse(localStorage.getItem(LOCKOUT_KEY) || '{}');
+      var remaining = MAX_ATTEMPTS - (lockout.attempts || 0);
+      return { 
+        success: false, 
+        error: 'Invalid credentials. ' + remaining + ' attempts remaining.',
+        attemptsRemaining: remaining
+      };
     }
-  } else {
-    // Customer login - for demo, we'll use email as identifier
-    // In production, you'd verify against a database
-    const session = {
-      email: email,
-      role: 'customer',
-      loginTime: new Date().toISOString(),
-      isAuthenticated: true
-    };
-    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
-    return { success: true, user: session };
   }
-}
 
-// Logout function
-function logout() {
-  localStorage.removeItem(AUTH_STORAGE_KEY);
-  return true;
-}
-
-// Check if user is authenticated
-function isAuthenticated() {
-  const authData = localStorage.getItem(AUTH_STORAGE_KEY);
-  if (!authData) return false;
-  
-  try {
-    const session = JSON.parse(authData);
-    return session.isAuthenticated === true;
-  } catch (e) {
-    return false;
+  // Generate session ID
+  function generateSessionId() {
+    return 'sess_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 9);
   }
-}
 
-// Get current user
-function getCurrentUser() {
-  const authData = localStorage.getItem(AUTH_STORAGE_KEY);
-  if (!authData) return null;
-  
-  try {
-    return JSON.parse(authData);
-  } catch (e) {
-    return null;
+  // Logout
+  function logout() {
+    localStorage.removeItem(AUTH_KEY);
+    return true;
   }
-}
 
-// Check if user is admin
-function isAdmin() {
-  const user = getCurrentUser();
-  return user && user.role === 'admin';
-}
-
-// Require authentication (redirect if not authenticated)
-function requireAuth(redirectUrl = 'customer-login.html') {
-  if (!isAuthenticated()) {
-    window.location.href = redirectUrl;
-    return false;
+  // Check if authenticated
+  function isAuthenticated() {
+    try {
+      var session = JSON.parse(localStorage.getItem(AUTH_KEY));
+      if (!session || !session.isAuthenticated) return false;
+      
+      // Session expires after 2 hours
+      var loginTime = new Date(session.loginTime).getTime();
+      var now = new Date().getTime();
+      var twoHours = 2 * 60 * 60 * 1000;
+      
+      if (now - loginTime > twoHours) {
+        logout();
+        return false;
+      }
+      
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
-  return true;
-}
 
-// Require admin (redirect if not admin)
-function requireAdmin(redirectUrl = 'customer-login.html') {
-  if (!isAdmin()) {
-    window.location.href = redirectUrl;
-    return false;
+  // Check if admin
+  function isAdmin() {
+    try {
+      var session = JSON.parse(localStorage.getItem(AUTH_KEY));
+      return session && session.isAuthenticated && session.role === 'admin';
+    } catch (e) {
+      return false;
+    }
   }
-  return true;
-}
 
-// Update admin password
-function updateAdminPassword(newPassword) {
-  if (!isAdmin()) {
-    return { success: false, error: 'Unauthorized' };
+  // Get current user
+  function getCurrentUser() {
+    try {
+      return JSON.parse(localStorage.getItem(AUTH_KEY));
+    } catch (e) {
+      return null;
+    }
   }
-  
-  const adminCreds = JSON.parse(localStorage.getItem(ADMIN_CREDENTIALS_KEY));
-  adminCreds.password = newPassword;
-  localStorage.setItem(ADMIN_CREDENTIALS_KEY, JSON.stringify(adminCreds));
-  return { success: true };
-}
 
-// Export functions
-if (typeof window !== 'undefined') {
-  window.Auth = {
-    login,
-    logout,
-    isAuthenticated,
-    getCurrentUser,
-    isAdmin,
-    requireAuth,
-    requireAdmin,
-    updateAdminPassword,
-    initAuthStorage
+  // Update admin password
+  function updatePassword(currentPassword, newPassword) {
+    if (!isAdmin()) {
+      return { success: false, error: 'Not authorized' };
+    }
+    
+    var admin = JSON.parse(localStorage.getItem(ADMIN_KEY));
+    var currentHash = hashPassword(currentPassword);
+    
+    if (currentHash !== admin.passwordHash) {
+      return { success: false, error: 'Current password incorrect' };
+    }
+    
+    if (newPassword.length < 8) {
+      return { success: false, error: 'Password must be at least 8 characters' };
+    }
+    
+    admin.passwordHash = hashPassword(newPassword);
+    localStorage.setItem(ADMIN_KEY, JSON.stringify(admin));
+    
+    return { success: true };
+  }
+
+  // Encryption for sensitive data
+  var Crypto = {
+    // Encryption key derived from session
+    getKey: function() {
+      var session = JSON.parse(localStorage.getItem(AUTH_KEY) || '{}');
+      return 'SEVA_SEC_' + (session.sessionId || 'default').substr(0, 16);
+    },
+    
+    // Simple XOR encryption (for localStorage only - not true security)
+    encrypt: function(text) {
+      if (!text) return '';
+      var key = this.getKey();
+      var result = '';
+      for (var i = 0; i < text.length; i++) {
+        result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+      }
+      return btoa(result);
+    },
+    
+    decrypt: function(encoded) {
+      if (!encoded) return '';
+      try {
+        var text = atob(encoded);
+        var key = this.getKey();
+        var result = '';
+        for (var i = 0; i < text.length; i++) {
+          result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+        }
+        return result;
+      } catch (e) {
+        return '[Decryption failed]';
+      }
+    },
+    
+    // Mask card number for display
+    maskCard: function(cardNumber) {
+      if (!cardNumber || cardNumber.length < 4) return '****';
+      return '**** **** **** ' + cardNumber.slice(-4);
+    }
   };
-}
 
-// Initialize on load
-if (typeof document !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', function() {
-    initAuthStorage();
-  });
-}
+  // Initialize on load
+  initAuth();
+
+  // Export
+  window.Auth = {
+    login: login,
+    logout: logout,
+    isAuthenticated: isAuthenticated,
+    isAdmin: isAdmin,
+    getCurrentUser: getCurrentUser,
+    updatePassword: updatePassword,
+    isLockedOut: isLockedOut,
+    getLockoutRemaining: getLockoutRemaining,
+    Crypto: Crypto
+  };
+
+})();

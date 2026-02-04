@@ -1,6 +1,20 @@
 // Customer Account JavaScript
+// Uses SecureStorage for sanitized order data (no sensitive info exposed)
 
 let currentCustomerEmail = null;
+
+// Get customer orders using secure storage
+function getCustomerOrders(email) {
+  // Use SecureStorage if available (returns sanitized data only)
+  if (typeof SecureStorage !== 'undefined') {
+    return SecureStorage.getOrdersByEmail(email);
+  }
+  // Fallback to OrderManager
+  if (typeof OrderManager !== 'undefined') {
+    return OrderManager.getOrdersByEmail(email);
+  }
+  return [];
+}
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', function() {
@@ -43,15 +57,15 @@ function setupEventListeners() {
         return;
       }
       
-      // Check if customer has orders
-      const orders = OrderManager.getOrdersByEmail(email);
+      // Check if customer has orders using secure storage
+      const orders = getCustomerOrders(email);
       if (orders.length === 0) {
         alert('No orders found for this email address. Please use the email address you used when placing your order.');
         return;
       }
       
       // Login customer
-      const result = Auth.login(email, '', false);
+      const result = Auth.login(email, '', true); // true = isCustomer
       if (result.success) {
         currentCustomerEmail = email;
         showAccountDashboard();
@@ -69,7 +83,7 @@ function setupEventListeners() {
         Auth.logout();
         currentCustomerEmail = null;
         showLoginForm();
-        document.getElementById('customerLoginForm').reset();
+        document.getElementById('customerLoginForm').reset(); 
       }
     });
   }
@@ -79,7 +93,8 @@ function setupEventListeners() {
 function loadCustomerData() {
   if (!currentCustomerEmail) return;
   
-  const orders = OrderManager.getOrdersByEmail(currentCustomerEmail);
+  // Use secure storage for sanitized data
+  const orders = getCustomerOrders(currentCustomerEmail);
   
   if (orders.length === 0) {
     document.getElementById('customerOrdersList').innerHTML = 
@@ -87,23 +102,55 @@ function loadCustomerData() {
     return;
   }
   
-  // Update summary counts
-  const pending = orders.filter(o => o.status === OrderManager.ORDER_STATUS.PENDING || 
-                                     o.status === OrderManager.ORDER_STATUS.PROCESSING).length;
-  const delivered = orders.filter(o => o.status === OrderManager.ORDER_STATUS.DELIVERED).length;
+  // Update summary counts (handle both old and new status formats)
+  const pendingStatuses = ['pending', 'pending_payment', 'processing'];
+  const pending = orders.filter(o => pendingStatuses.includes(o.status)).length;
+  const delivered = orders.filter(o => o.status === 'delivered').length;
   
   document.getElementById('totalOrdersCount').textContent = orders.length;
   document.getElementById('pendingOrdersCount').textContent = pending;
   document.getElementById('deliveredOrdersCount').textContent = delivered;
   
-  // Update customer info
+  // Update customer info (use sanitized data from SecureStorage)
   const latestOrder = orders[0];
   document.getElementById('customerEmailDisplay').textContent = currentCustomerEmail;
-  document.getElementById('customerNameDisplay').textContent = latestOrder.customer.name || '-';
-  document.getElementById('customerPhoneDisplay').textContent = latestOrder.customer.phone || '-';
+  document.getElementById('customerNameDisplay').textContent = latestOrder.customer ? latestOrder.customer.name || '-' : '-';
+  // Phone is masked in SecureStorage public data
+  document.getElementById('customerPhoneDisplay').textContent = latestOrder.customer ? (latestOrder.customer.phoneMasked || latestOrder.customer.phone || '-') : '-';
   
   // Display orders
   displayCustomerOrders(orders);
+}
+
+// Get status badge class
+function getStatusBadgeClass(status) {
+  const classes = {
+    'pending': 'bg-warning',
+    'pending_payment': 'bg-danger',
+    'processing': 'bg-info',
+    'shipped': 'bg-primary',
+    'delivered': 'bg-success',
+    'cancelled': 'bg-secondary'
+  };
+  return classes[status] || 'bg-secondary';
+}
+
+// Format status text
+function formatStatusText(status) {
+  const labels = {
+    'pending': 'Pending',
+    'pending_payment': 'Awaiting Payment',
+    'processing': 'Processing',
+    'shipped': 'Shipped',
+    'delivered': 'Delivered',
+    'cancelled': 'Cancelled'
+  };
+  return labels[status] || status;
+}
+
+// Format price
+function formatPrice(cents) {
+  return '$' + (cents / 100).toFixed(2);
 }
 
 // Display customer orders
@@ -111,16 +158,20 @@ function displayCustomerOrders(orders) {
   const container = document.getElementById('customerOrdersList');
   
   const ordersHTML = orders.map(order => {
-    const statusClass = OrderManager.getStatusBadgeClass(order.status);
-    const statusText = OrderManager.formatStatusText(order.status);
+    const statusClass = getStatusBadgeClass(order.status);
+    const statusText = formatStatusText(order.status);
     
     // Determine border color based on status
     let borderColor = '#dee2e6';
-    if (order.status === OrderManager.ORDER_STATUS.PENDING) borderColor = '#ffc107';
-    else if (order.status === OrderManager.ORDER_STATUS.PROCESSING) borderColor = '#17a2b8';
-    else if (order.status === OrderManager.ORDER_STATUS.SHIPPED) borderColor = '#007bff';
-    else if (order.status === OrderManager.ORDER_STATUS.DELIVERED) borderColor = '#28a745';
-    else if (order.status === OrderManager.ORDER_STATUS.CANCELLED) borderColor = '#dc3545';
+    if (order.status === 'pending' || order.status === 'pending_payment') borderColor = '#ffc107';
+    else if (order.status === 'processing') borderColor = '#17a2b8';
+    else if (order.status === 'shipped') borderColor = '#007bff';
+    else if (order.status === 'delivered') borderColor = '#28a745';
+    else if (order.status === 'cancelled') borderColor = '#dc3545';
+    
+    // Use totalFormatted if available, otherwise format the cents value
+    const totalDisplay = order.totalFormatted || formatPrice(order.total || 0);
+    const itemCount = order.items ? order.items.length : 0;
     
     return `
       <div class="card order-card mb-3" style="border-left-color: ${borderColor};">
@@ -134,8 +185,8 @@ function displayCustomerOrders(orders) {
               <span class="badge ${statusClass} status-badge">${statusText}</span>
             </div>
             <div class="col-md-3">
-              <strong>${OrderManager.formatPrice(order.total)}</strong><br>
-              <small class="text-muted">${order.items.length} item(s)</small>
+              <strong>${totalDisplay}</strong><br>
+              <small class="text-muted">${itemCount} item(s)</small>
             </div>
             <div class="col-md-2">
               ${order.trackingNumber ? `
@@ -153,22 +204,22 @@ function displayCustomerOrders(orders) {
           <!-- Order Timeline -->
           <div class="mt-3 pt-3 border-top">
             <div class="order-timeline">
-              <div class="timeline-item ${order.status === OrderManager.ORDER_STATUS.PENDING ? 'active' : 'completed'}">
+              <div class="timeline-item ${order.status === 'pending' || order.status === 'pending_payment' ? 'active' : 'completed'}">
                 <strong>Order Placed</strong>
                 <small class="text-muted d-block">${order.date}</small>
               </div>
-              ${order.status !== OrderManager.ORDER_STATUS.PENDING ? `
-                <div class="timeline-item ${order.status === OrderManager.ORDER_STATUS.PROCESSING ? 'active' : 'completed'}">
+              ${order.status !== 'pending' && order.status !== 'pending_payment' ? `
+                <div class="timeline-item ${order.status === 'processing' ? 'active' : 'completed'}">
                   <strong>Processing</strong>
                 </div>
               ` : ''}
-              ${order.status === OrderManager.ORDER_STATUS.SHIPPED || order.status === OrderManager.ORDER_STATUS.DELIVERED ? `
-                <div class="timeline-item ${order.status === OrderManager.ORDER_STATUS.SHIPPED ? 'active' : 'completed'}">
+              ${order.status === 'shipped' || order.status === 'delivered' ? `
+                <div class="timeline-item ${order.status === 'shipped' ? 'active' : 'completed'}">
                   <strong>Shipped</strong>
                   ${order.trackingNumber ? `<small class="text-muted d-block">Tracking: ${order.trackingNumber}</small>` : ''}
                 </div>
               ` : ''}
-              ${order.status === OrderManager.ORDER_STATUS.DELIVERED ? `
+              ${order.status === 'delivered' ? `
                 <div class="timeline-item completed">
                   <strong>Delivered</strong>
                 </div>
@@ -185,29 +236,44 @@ function displayCustomerOrders(orders) {
 
 // View order details
 function viewCustomerOrder(orderId) {
-  const order = OrderManager.getOrderById(orderId);
+  // Get order from customer's orders (already filtered by email)
+  const orders = getCustomerOrders(currentCustomerEmail);
+  const order = orders.find(o => o.id === orderId);
+  
   if (!order) {
     alert('Order not found');
     return;
   }
   
   // Verify order belongs to current customer
-  if (order.customer.email.toLowerCase() !== currentCustomerEmail.toLowerCase()) {
+  if (!order.customer || order.customer.email.toLowerCase() !== currentCustomerEmail.toLowerCase()) {
     alert('Access denied');
     return;
   }
   
-  const itemsHTML = order.items.map(item => `
-    <tr>
-      <td>${item.name}</td>
-      <td>${item.quantity}</td>
-      <td>${OrderManager.formatPrice(item.price)}</td>
-      <td>${OrderManager.formatPrice(item.price * item.quantity)}</td>
-    </tr>
-  `).join('');
+  // Build items HTML (handle both old and new item formats)
+  const itemsHTML = (order.items || []).map(item => {
+    const itemSubtotal = item.subtotalFormatted || formatPrice((item.price || 0) * (item.quantity || 1));
+    const unitPrice = item.priceFormatted || formatPrice(item.price || 0);
+    return `
+      <tr>
+        <td>${item.name || 'Item'}</td>
+        <td>${item.quantity || 1}</td>
+        <td>${unitPrice}</td>
+        <td>${itemSubtotal}</td>
+      </tr>
+    `;
+  }).join('');
   
-  const statusClass = OrderManager.getStatusBadgeClass(order.status);
-  const statusText = OrderManager.formatStatusText(order.status);
+  const statusClass = getStatusBadgeClass(order.status);
+  const statusText = formatStatusText(order.status);
+  const totalDisplay = order.totalFormatted || formatPrice(order.total || 0);
+  
+  // Delivery address (sanitized in SecureStorage - only city/state visible to customers)
+  const deliveryAddress = order.deliveryAddress || {};
+  const addressHtml = deliveryAddress.hasAddress ? 
+    `${deliveryAddress.city || ''}, ${deliveryAddress.state || ''}` :
+    (deliveryAddress.city ? `${deliveryAddress.city}, ${deliveryAddress.state || ''} ${deliveryAddress.zip || ''}` : '<span class="text-muted">Address on file</span>');
   
   const content = `
     <div class="row">
@@ -215,19 +281,18 @@ function viewCustomerOrder(orderId) {
         <h6>Order Information</h6>
         <table class="table table-sm">
           <tr><td><strong>Order Number:</strong></td><td>${order.orderNumber}</td></tr>
-          <tr><td><strong>Date:</strong></td><td>${order.date}</td></tr>
+          <tr><td><strong>Date:</strong></td><td>${order.dateTime || order.date}</td></tr>
           <tr><td><strong>Status:</strong></td><td><span class="badge ${statusClass}">${statusText}</span></td></tr>
           ${order.trackingNumber ? `<tr><td><strong>Tracking Number:</strong></td><td>${order.trackingNumber}</td></tr>` : ''}
           ${order.estimatedDelivery ? `<tr><td><strong>Estimated Delivery:</strong></td><td>${order.estimatedDelivery}</td></tr>` : ''}
         </table>
       </div>
       <div class="col-md-6">
-        <h6>Delivery Address</h6>
+        <h6>Delivery Location</h6>
         <address>
-          ${order.deliveryAddress.street || ''}<br>
-          ${order.deliveryAddress.city || ''}, ${order.deliveryAddress.state || ''} ${order.deliveryAddress.zip || ''}<br>
-          ${order.deliveryAddress.country || ''}
+          ${addressHtml}
         </address>
+        <small class="text-muted">Full address details stored securely</small>
       </div>
     </div>
     
@@ -248,24 +313,8 @@ function viewCustomerOrder(orderId) {
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="3"><strong>Subtotal:</strong></td>
-              <td>${OrderManager.formatPrice(order.subtotal)}</td>
-            </tr>
-            ${order.shipping > 0 ? `
-              <tr>
-                <td colspan="3"><strong>Shipping:</strong></td>
-                <td>${OrderManager.formatPrice(order.shipping)}</td>
-              </tr>
-            ` : ''}
-            ${order.tax > 0 ? `
-              <tr>
-                <td colspan="3"><strong>Tax:</strong></td>
-                <td>${OrderManager.formatPrice(order.tax)}</td>
-              </tr>
-            ` : ''}
-            <tr>
-              <td colspan="3"><strong>Total:</strong></td>
-              <td><strong>${OrderManager.formatPrice(order.total)}</strong></td>
+              <td colspan="3"><strong>Order Total:</strong></td>
+              <td><strong>${totalDisplay}</strong></td>
             </tr>
           </tfoot>
         </table>

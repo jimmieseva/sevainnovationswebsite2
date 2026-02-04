@@ -278,79 +278,53 @@
     };
   }
 
-  // Simple encryption for sensitive data
-  function encryptData(text) {
-    if (!text) return '';
-    var key = 'SEVA_ORDER_KEY_' + new Date().getFullYear();
-    var result = '';
-    for (var i = 0; i < text.length; i++) {
-      result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-    }
-    return btoa(result);
-  }
-
-  // Save order to localStorage (for admin panel - manual payment processing)
+  // Save order using secure storage system
   function saveOrder(orderInfo) {
     try {
-      var orders = JSON.parse(localStorage.getItem('seva_orders') || '[]');
-      
-      // Encrypt sensitive payment data
-      var encryptedPayment = null;
-      if (orderInfo.payment) {
-        encryptedPayment = {
-          cardEncrypted: encryptData(orderInfo.payment.cardNumber),
-          expiryEncrypted: encryptData(orderInfo.payment.expiry),
-          cvvEncrypted: encryptData(orderInfo.payment.cvv),
-          cardHolderEncrypted: encryptData(orderInfo.payment.cardHolder),
-          lastFour: orderInfo.payment.lastFour // Keep last 4 for reference
-        };
+      // Use SecureStorage if available (recommended)
+      if (typeof SecureStorage !== 'undefined') {
+        var orderId = SecureStorage.storeOrder({
+          orderNumber: 'ORD-' + Date.now().toString(36).toUpperCase(),
+          date: new Date().toLocaleDateString(),
+          dateTime: new Date().toLocaleString(),
+          status: 'pending_payment',
+          customer: {
+            name: orderInfo.name,
+            email: orderInfo.email,
+            phone: orderInfo.phone
+          },
+          deliveryAddress: {
+            street: orderInfo.address,
+            city: orderInfo.city,
+            state: orderInfo.state,
+            zip: orderInfo.zip,
+            country: 'USA'
+          },
+          items: orderInfo.items.map(function(item) {
+            return {
+              id: item.id,
+              name: item.name,
+              description: item.description || '',
+              price: item.price,
+              priceFormatted: '$' + (item.price / 100).toFixed(2),
+              quantity: item.quantity,
+              subtotal: item.price * item.quantity,
+              subtotalFormatted: '$' + ((item.price * item.quantity) / 100).toFixed(2)
+            };
+          }),
+          total: orderInfo.total,
+          totalFormatted: '$' + (orderInfo.total / 100).toFixed(2),
+          paymentStatus: 'awaiting_processing',
+          payment: orderInfo.payment, // Will be encrypted by SecureStorage
+          createdAt: new Date().toISOString()
+        });
+        
+        console.log('Order saved securely:', orderId);
+        return;
       }
       
-      var order = {
-        id: 'order_' + Date.now(),
-        orderNumber: 'ORD-' + Date.now().toString(36).toUpperCase(),
-        date: new Date().toLocaleDateString(),
-        dateTime: new Date().toLocaleString(),
-        status: 'pending_payment',
-        customer: {
-          name: orderInfo.name,
-          email: orderInfo.email,
-          phone: orderInfo.phone
-        },
-        deliveryAddress: {
-          street: orderInfo.address,
-          city: orderInfo.city,
-          state: orderInfo.state,
-          zip: orderInfo.zip,
-          country: 'USA'
-        },
-        items: orderInfo.items.map(function(item) {
-          return {
-            id: item.id,
-            name: item.name,
-            description: item.description || '',
-            price: item.price,
-            priceFormatted: '$' + (item.price / 100).toFixed(2),
-            quantity: item.quantity,
-            subtotal: item.price * item.quantity,
-            subtotalFormatted: '$' + ((item.price * item.quantity) / 100).toFixed(2)
-          };
-        }),
-        total: orderInfo.total,
-        totalFormatted: '$' + (orderInfo.total / 100).toFixed(2),
-        paymentStatus: 'awaiting_processing',
-        paymentMethod: 'card',
-        paymentData: encryptedPayment, // Encrypted card data
-        paymentNotes: 'Card details collected - ready for manual processing',
-        createdAt: new Date().toISOString(),
-        processedAt: null,
-        paidAt: null
-      };
-      
-      orders.unshift(order);
-      localStorage.setItem('seva_orders', JSON.stringify(orders));
-      
-      console.log('Order saved:', order.orderNumber);
+      // Fallback - should not reach here if secure-storage.js is loaded
+      console.warn('SecureStorage not available - order not saved');
       
     } catch (e) {
       console.error('Failed to save order:', e);

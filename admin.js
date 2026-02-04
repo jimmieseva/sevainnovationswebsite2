@@ -488,20 +488,12 @@
     input.value = '';
   }
 
-  // Decrypt sensitive data
-  function decryptData(encoded) {
-    if (!encoded) return '';
-    try {
-      var text = atob(encoded);
-      var key = 'SEVA_ORDER_KEY_' + new Date().getFullYear();
-      var result = '';
-      for (var i = 0; i < text.length; i++) {
-        result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-      }
-      return result;
-    } catch (e) {
-      return '[Error]';
+  // Decrypt sensitive data using SecureStorage
+  function decryptPaymentField(orderId, field) {
+    if (typeof SecureStorage !== 'undefined') {
+      return SecureStorage.decryptPaymentField(orderId, field);
     }
+    return '[Secure Storage Required]';
   }
 
   // View order - detailed view with payment processing info
@@ -512,8 +504,18 @@
       return;
     }
     
-    var orders = getOrders();
-    var order = orders.find(function(o) { return o.id === orderId; });
+    // Get full order details from secure storage
+    var order = null;
+    if (typeof SecureStorage !== 'undefined') {
+      order = SecureStorage.getFullOrder(orderId);
+    }
+    
+    // Fallback to old storage
+    if (!order) {
+      var orders = getOrders();
+      order = orders.find(function(o) { return o.id === orderId; });
+    }
+    
     if (!order) return;
 
     var items = (order.items || []).map(function(item) {
@@ -581,6 +583,7 @@
         '<div class="card bg-dark text-white mt-3">' +
         '<div class="card-header"><i class="fas fa-credit-card me-2"></i>Payment Card Details <span class="badge bg-warning text-dark ms-2">CONFIDENTIAL</span></div>' +
         '<div class="card-body">' +
+        '<div class="alert alert-warning py-2 mb-3"><i class="fas fa-shield-alt me-2"></i>Card data is encrypted with per-order keys. Click reveal to decrypt.</div>' +
         '<div class="row">' +
         '<div class="col-md-6">' +
         '<p class="mb-1"><small class="text-muted">Card Number</small><br><code class="text-warning" id="card-num-' + order.id + '">**** **** **** ' + (order.paymentData.lastFour || '****') + '</code>' +
@@ -595,10 +598,11 @@
         '<button class="btn btn-sm btn-outline-light ms-2" onclick="Admin.revealCVV(\'' + order.id + '\')"><i class="fas fa-eye"></i></button></p>' +
         '</div>' +
         '</div>' +
-        '<p class="mb-0"><small class="text-muted">Cardholder</small><br><strong id="card-holder-' + order.id + '">' + decryptData(order.paymentData.cardHolderEncrypted) + '</strong></p>' +
+        '<p class="mb-0"><small class="text-muted">Cardholder</small><br><strong id="card-holder-' + order.id + '">Click reveal to show</strong>' +
+        '<button class="btn btn-sm btn-outline-light ms-2" onclick="Admin.revealHolder(\'' + order.id + '\')"><i class="fas fa-eye"></i></button></p>' +
         '<hr class="border-secondary">' +
         '<p class="small text-warning mb-0"><i class="fas fa-exclamation-triangle me-1"></i>Process this card through your Stripe terminal or dashboard. Delete payment data after processing.</p>' +
-        '</div></div>' : ''
+        '</div></div>' : (order.hasPaymentData === false ? '<div class="alert alert-secondary mt-3"><i class="fas fa-check-circle me-2"></i>Payment data has been securely deleted after processing.</div>' : '')
       ) +
       
       (order.paymentStatus !== 'paid' ? 
@@ -634,13 +638,23 @@
   
   // Mark order as paid
   function markPaid(orderId) {
+    if (typeof SecureStorage !== 'undefined') {
+      SecureStorage.updateOrderStatus(orderId, 'processing', {
+        paymentStatus: 'paid',
+        paidAt: new Date().toISOString()
+      });
+      loadOrders(document.getElementById('orderFilter').value);
+      showToast('Order marked as paid!', 'success');
+      return;
+    }
+    
+    // Fallback
     var orders = getOrders();
     var order = orders.find(function(o) { return o.id === orderId; });
     if (order) {
       order.paymentStatus = 'paid';
       order.paidAt = new Date().toISOString();
       order.status = 'processing';
-      order.paymentNotes = 'Marked as paid manually on ' + new Date().toLocaleString();
       localStorage.setItem('seva_orders', JSON.stringify(orders));
       loadOrders(document.getElementById('orderFilter').value);
       showToast('Order marked as paid!', 'success');
@@ -649,9 +663,13 @@
   
   // Delete order
   function deleteOrder(orderId) {
-    var orders = getOrders();
-    orders = orders.filter(function(o) { return o.id !== orderId; });
-    localStorage.setItem('seva_orders', JSON.stringify(orders));
+    if (typeof SecureStorage !== 'undefined') {
+      SecureStorage.deleteOrder(orderId);
+    } else {
+      var orders = getOrders();
+      orders = orders.filter(function(o) { return o.id !== orderId; });
+      localStorage.setItem('seva_orders', JSON.stringify(orders));
+    }
     loadOrders(document.getElementById('orderFilter').value);
     bootstrap.Modal.getInstance(document.getElementById('orderModal')).hide();
     showToast('Order deleted', 'info');
@@ -659,6 +677,14 @@
 
   // Update order status
   function updateStatus(orderId, status) {
+    if (typeof SecureStorage !== 'undefined') {
+      SecureStorage.updateOrderStatus(orderId, status);
+      loadOrders(document.getElementById('orderFilter').value);
+      showToast('Status updated', 'success');
+      return;
+    }
+    
+    // Fallback
     var orders = getOrders();
     var order = orders.find(function(o) { return o.id === orderId; });
     if (order) {
@@ -669,8 +695,12 @@
     }
   }
 
-  // Get orders from storage
+  // Get orders from secure storage
   function getOrders() {
+    if (typeof SecureStorage !== 'undefined') {
+      return SecureStorage.getPublicOrders();
+    }
+    // Fallback to old storage
     try {
       var stored = localStorage.getItem('seva_orders');
       return stored ? JSON.parse(stored) : [];
@@ -715,44 +745,56 @@
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  // Reveal card number
+  // Reveal card number using SecureStorage
   function revealCard(orderId) {
     if (!Auth.isAdmin()) return;
-    var orders = getOrders();
-    var order = orders.find(function(o) { return o.id === orderId; });
-    if (order && order.paymentData) {
-      var el = document.getElementById('card-num-' + orderId);
-      if (el) el.textContent = decryptData(order.paymentData.cardEncrypted);
+    var el = document.getElementById('card-num-' + orderId);
+    if (el) {
+      el.textContent = decryptPaymentField(orderId, 'card') || '[No Data]';
     }
   }
   
-  // Reveal expiry
+  // Reveal expiry using SecureStorage
   function revealExpiry(orderId) {
     if (!Auth.isAdmin()) return;
-    var orders = getOrders();
-    var order = orders.find(function(o) { return o.id === orderId; });
-    if (order && order.paymentData) {
-      var el = document.getElementById('card-exp-' + orderId);
-      if (el) el.textContent = decryptData(order.paymentData.expiryEncrypted);
+    var el = document.getElementById('card-exp-' + orderId);
+    if (el) {
+      el.textContent = decryptPaymentField(orderId, 'expiry') || '[No Data]';
     }
   }
   
-  // Reveal CVV
+  // Reveal CVV using SecureStorage
   function revealCVV(orderId) {
     if (!Auth.isAdmin()) return;
-    var orders = getOrders();
-    var order = orders.find(function(o) { return o.id === orderId; });
-    if (order && order.paymentData) {
-      var el = document.getElementById('card-cvv-' + orderId);
-      if (el) el.textContent = decryptData(order.paymentData.cvvEncrypted);
+    var el = document.getElementById('card-cvv-' + orderId);
+    if (el) {
+      el.textContent = decryptPaymentField(orderId, 'cvv') || '[No Data]';
     }
   }
   
-  // Clear payment data after processing
+  // Reveal cardholder name
+  function revealHolder(orderId) {
+    if (!Auth.isAdmin()) return;
+    var el = document.getElementById('card-holder-' + orderId);
+    if (el) {
+      el.textContent = decryptPaymentField(orderId, 'holder') || '[No Data]';
+    }
+  }
+  
+  // Clear payment data after processing using SecureStorage
   function clearPaymentData(orderId) {
     if (!Auth.isAdmin()) return;
     if (!confirm('Delete card data for this order? This cannot be undone.')) return;
     
+    if (typeof SecureStorage !== 'undefined') {
+      SecureStorage.clearPaymentData(orderId);
+      showToast('Payment data deleted securely', 'success');
+      bootstrap.Modal.getInstance(document.getElementById('orderModal')).hide();
+      loadOrders(document.getElementById('orderFilter').value);
+      return;
+    }
+    
+    // Fallback for old storage
     var orders = getOrders();
     var order = orders.find(function(o) { return o.id === orderId; });
     if (order) {
@@ -781,6 +823,7 @@
     revealCard: revealCard,
     revealExpiry: revealExpiry,
     revealCVV: revealCVV,
+    revealHolder: revealHolder,
     clearPaymentData: clearPaymentData
   };
 

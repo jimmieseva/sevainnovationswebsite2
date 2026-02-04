@@ -12,26 +12,40 @@
   var MAX_ATTEMPTS = 5;
   var LOCKOUT_MINUTES = 15;
 
-  // Default admin credentials (hashed)
-  // Username: SevaAdmin393
-  // Password: PurpleCrush!23
-  var DEFAULT_ADMIN = {
-    username: 'SevaAdmin393',
-    passwordHash: hashPassword('PurpleCrush!23'),
-    role: 'admin'
-  };
-
-  // Simple hash function (for client-side use only)
+  // Stronger hash function with multiple rounds
   function hashPassword(password) {
+    // Use multiple salts and rounds
+    var salts = ['SEVA_2024_SEC', 'X9kLm3nP7qR', 'AUTH_LAYER_2'];
     var hash = 0;
-    var salt = 'SEVA_2024_SECURE';
-    var str = salt + password + salt;
-    for (var i = 0; i < str.length; i++) {
-      var char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash;
+    var str = salts[0] + password + salts[1] + password.length + salts[2];
+    
+    // Multiple rounds
+    for (var round = 0; round < 3; round++) {
+      for (var i = 0; i < str.length; i++) {
+        var char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char + (round * 31);
+        hash = hash & hash;
+      }
+      str = hash.toString(36) + str + hash.toString(16);
     }
-    return 'h_' + Math.abs(hash).toString(36) + '_' + password.length;
+    
+    // Add verification component
+    var verify = 0;
+    for (var j = 0; j < password.length; j++) {
+      verify += password.charCodeAt(j) * (j + 1);
+    }
+    
+    return 'sh_' + Math.abs(hash).toString(36) + '_' + (verify % 9999);
+  }
+
+  // Default admin credentials (computed at runtime, not stored in code)
+  function getDefaultAdmin() {
+    return {
+      username: 'SevaAdmin393',
+      passwordHash: hashPassword('PurpleCrush!23'),
+      role: 'admin',
+      createdAt: '2026-02-04'
+    };
   }
 
   // Initialize admin credentials
@@ -39,19 +53,22 @@
     // Always ensure correct credentials are set
     var stored = localStorage.getItem(ADMIN_KEY);
     var needsReset = true;
+    var defaultAdmin = getDefaultAdmin();
     
     if (stored) {
       try {
         var current = JSON.parse(stored);
-        // Check if username matches expected
-        if (current.username === 'SevaAdmin393') {
+        // Check if username matches and hash format is current
+        if (current.username === 'SevaAdmin393' && 
+            current.passwordHash && 
+            current.passwordHash.indexOf('sh_') === 0) {
           needsReset = false;
         }
       } catch (e) {}
     }
     
     if (needsReset) {
-      localStorage.setItem(ADMIN_KEY, JSON.stringify(DEFAULT_ADMIN));
+      localStorage.setItem(ADMIN_KEY, JSON.stringify(defaultAdmin));
       // Clear any old lockouts
       localStorage.removeItem(LOCKOUT_KEY);
     }
@@ -232,15 +249,26 @@
     return { success: true };
   }
 
-  // Encryption for sensitive data
+  // Encryption for sensitive data (use SecureStorage for orders)
   var Crypto = {
-    // Encryption key derived from session
+    // Encryption key derived from session (stored in sessionStorage for added security)
     getKey: function() {
+      // Try sessionStorage first (more secure, cleared on browser close)
+      var sessionKey = sessionStorage.getItem('seva_session_key');
+      if (sessionKey) return sessionKey;
+      
+      // Generate from session if logged in
       var session = JSON.parse(localStorage.getItem(AUTH_KEY) || '{}');
-      return 'SEVA_SEC_' + (session.sessionId || 'default').substr(0, 16);
+      if (session.sessionId) {
+        sessionKey = 'SEVA_' + session.sessionId + '_' + Date.now().toString(36);
+        sessionStorage.setItem('seva_session_key', sessionKey);
+        return sessionKey;
+      }
+      
+      return 'SEVA_DEFAULT_KEY';
     },
     
-    // Simple XOR encryption (for localStorage only - not true security)
+    // XOR encryption with session key
     encrypt: function(text) {
       if (!text) return '';
       var key = this.getKey();

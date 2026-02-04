@@ -105,10 +105,24 @@
     } catch (e) {}
   }
 
-  // Login function
-  function login(username, password) {
+  // Login function - supports both admin (username/password) and customer (email only)
+  function login(usernameOrEmail, password, isCustomer) {
     initAuth();
     
+    // Customer login (email-only)
+    if (isCustomer === true || (password === '' && usernameOrEmail.includes('@'))) {
+      var session = {
+        email: usernameOrEmail,
+        role: 'customer',
+        loginTime: new Date().toISOString(),
+        sessionId: generateSessionId(),
+        isAuthenticated: true
+      };
+      localStorage.setItem(AUTH_KEY, JSON.stringify(session));
+      return { success: true, user: session };
+    }
+    
+    // Admin login (username + password)
     if (isLockedOut()) {
       return { 
         success: false, 
@@ -120,9 +134,9 @@
     var admin = JSON.parse(localStorage.getItem(ADMIN_KEY));
     var inputHash = hashPassword(password);
 
-    if (username === admin.username && inputHash === admin.passwordHash) {
+    if (usernameOrEmail === admin.username && inputHash === admin.passwordHash) {
       var session = {
-        username: username,
+        username: usernameOrEmail,
         role: 'admin',
         loginTime: new Date().toISOString(),
         sessionId: generateSessionId(),

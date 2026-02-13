@@ -25,7 +25,7 @@
     
     // Backend API endpoint for creating checkout sessions
     // Deploy backend from /backend folder, then put URL here
-    API_ENDPOINT: 'https://1x3wclxec7.execute-api.us-west-1.amazonaws.com/prod/',
+    API_ENDPOINT: 'https://fm6myi2sg4khjyvunakcbt3gfi0vhdkb.lambda-url.us-west-1.on.aws/',
     
     // Redirect URLs after payment
     SUCCESS_URL: window.location.origin + '/tactilink.html?payment=success',
